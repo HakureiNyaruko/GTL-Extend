@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "org.qiuyeqaq.gtl_extend.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "gtl_extend.refmap.json",
+  "mixins": [
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
