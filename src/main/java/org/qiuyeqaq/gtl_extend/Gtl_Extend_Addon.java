@@ -22,7 +22,7 @@ public class Gtl_Extend_Addon implements IGTAddon {
 
     @Override
     public GTRegistrate getRegistrate() {
-            return GTLEXRegistration.REGISTRATE;
+        return GTLEXRegistration.REGISTRATE;
     }
 
     @Override
@@ -40,6 +40,7 @@ public class Gtl_Extend_Addon implements IGTAddon {
     public String addonModId() {
         return Gtl_extend.MODID;
     }
+
     @Override
     public void collectMaterialCasings(MaterialCasingCollectionEvent event) {
         IGTAddon.super.collectMaterialCasings(event);

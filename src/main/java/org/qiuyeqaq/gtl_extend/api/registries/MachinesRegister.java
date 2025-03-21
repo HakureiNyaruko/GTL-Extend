@@ -114,7 +114,6 @@ public class MachinesRegister {
             }).tier(tier);
             definitions[tier] = (MachineDefinition) builder.apply(tier, register);
         }
-
         return definitions;
     }
 
@@ -234,7 +233,6 @@ public class MachinesRegister {
             }).tier(tier);
             definitions[tier] = (MultiblockMachineDefinition) builder.apply(tier, register);
         }
-
         return definitions;
     }
 }

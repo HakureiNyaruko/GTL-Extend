@@ -23,8 +23,7 @@ import static org.qiuyeqaq.gtl_extend.api.registries.GTLEXRegistration.REGISTRAT
 
 public class Gtl_extend_Blocks {
 
-    public static void init() {
-    }
+    public static void init() {}
 
     public static BlockEntry<Block> createCasingBlock(String name, ResourceLocation texture) {
         return createCasingBlock(name, Block::new, texture, () -> Blocks.IRON_BLOCK,
@@ -52,5 +51,5 @@ public class Gtl_extend_Blocks {
     }
 
     @SuppressWarnings("all")
-    public static final BlockEntry<Block> VOID_WORLD_BLOCK = createCasingBlock("void_world_block", Gtl_extend.id("block/void_world_block"));
+    public static final BlockEntry<Block> DIMENSION_CORE = createCasingBlock("dimension_core", Gtl_extend.id("block/dimension_core"));
 }

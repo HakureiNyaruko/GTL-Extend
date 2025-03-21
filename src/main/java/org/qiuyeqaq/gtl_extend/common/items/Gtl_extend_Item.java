@@ -20,9 +20,17 @@ import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import org.qiuyeqaq.gtl_extend.common.data.GTL_Extend_CreativeModeTabs;
 import org.qiuyeqaq.gtl_extend.common.items.structurewrite.StructureWriteBehavior;
 
-import com.gregtechceu.gtceu.common.data.GTItems.*;
-import org.qiuyeqaq.gtl_extend.api.registries.GTLEXRegistration.*;
+import static com.gregtechceu.gtceu.common.data.GTItems.*;
+import static org.qiuyeqaq.gtl_extend.api.registries.GTLEXRegistration.*;
 
 public class Gtl_extend_Item {
+
+    static {
+        REGISTRATE.creativeModeTab(() -> GTL_Extend_CreativeModeTabs.GTL_EX_GT_ITEM);
+    }
+
+    public static final ItemEntry<Item> ULTMATE_SINGULARITY = REGISTRATE.item("ultmate_singularity", Item::new)
+            .lang("Ultimate Singularity")
+            .register();
     public static void init() {}
 }

@@ -24,7 +24,7 @@ public class GetRegistries {
     }
 
     public static ItemStack getItemStack(String s) {
-        return getItemStack(s,1);
+        return getItemStack(s, 1);
     }
 
     public static ItemStack getItemStack(String s, int a) {
@@ -49,4 +49,3 @@ public class GetRegistries {
         return f;
     }
 }
-

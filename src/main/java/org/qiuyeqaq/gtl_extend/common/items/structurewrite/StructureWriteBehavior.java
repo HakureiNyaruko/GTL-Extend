@@ -1,5 +1,7 @@
 package org.qiuyeqaq.gtl_extend.common.items.structurewrite;
 
+import org.gtlcore.gtlcore.api.pattern.DebugBlockPattern;
+
 import com.gregtechceu.gtceu.api.gui.GuiTextures;
 import com.gregtechceu.gtceu.api.item.ComponentItem;
 import com.gregtechceu.gtceu.api.item.component.IItemUIFactory;
@@ -29,7 +31,6 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 
 import com.google.common.base.Joiner;
-import org.gtlcore.gtlcore.api.pattern.DebugBlockPattern;
 import org.qiuyeqaq.gtl_extend.Gtl_extend;
 
 import java.io.BufferedWriter;

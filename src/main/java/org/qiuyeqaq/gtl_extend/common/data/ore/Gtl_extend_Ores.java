@@ -11,12 +11,12 @@ import org.qiuyeqaq.gtl_extend.common.materials.GTL_Extend_Materials;
 import org.qiuyeqaq.gtl_extend.config.GTLExtendConfigHolder;
 
 @SuppressWarnings("unused")
-public class Gtl_extend_Ores extends GTOres{
+public class Gtl_extend_Ores extends GTOres {
 
     public static void init() {}
 
-    public static final GTOreDefinition DeepvioletGleam_VEIN = GTLExtendConfigHolder.INSTANCE.enableInfinityDreamAndDreamHostCrafting ?
-            create(Gtl_extend.id("eternal_blue_dream_vein"),(vein) -> {
+    public static final GTOreDefinition Eternal_Blue_Dream_Vein = GTLExtendConfigHolder.INSTANCE.enableInfinityDreamAndDreamHostCrafting ?
+            create(Gtl_extend.id("eternal_blue_dream_vein"), (vein) -> {
                 vein
                         .clusterSize(UniformInt.of(25, 150))
                         .density(0.3F)

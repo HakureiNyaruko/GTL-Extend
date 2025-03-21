@@ -8,6 +8,6 @@ public class GTL_Extend_Elements {
     public static Element ETERNALBLUEDREAM;
 
     public static void init() {
-        ETERNALBLUEDREAM = GTElements.createAndRegister(150,110,-1,"","bluedream","$&@#*$^%$*",false);
+        ETERNALBLUEDREAM = GTElements.createAndRegister(150, 110, -1, "", "bluedream", "$&@#*$^%$*", false);
     }
 }

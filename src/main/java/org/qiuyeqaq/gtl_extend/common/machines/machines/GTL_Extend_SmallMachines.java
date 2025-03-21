@@ -19,8 +19,7 @@ import static org.qiuyeqaq.gtl_extend.common.machines.machines.GTL_Extend_Machin
 
 public class GTL_Extend_SmallMachines {
 
-    public static void init() {
-    }
+    public static void init() {}
 
     static {
         GTLEXRegistration.REGISTRATE.creativeModeTab(() -> GTL_Extend_CreativeModeTabs.MACHINES_ITEM);

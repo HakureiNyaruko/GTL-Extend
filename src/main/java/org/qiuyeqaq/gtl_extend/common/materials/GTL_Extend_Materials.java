@@ -9,6 +9,6 @@ public class GTL_Extend_Materials {
     public GTL_Extend_Materials() {}
 
     public static void init() {
-        GTL_Extend_Materials.init();
+        GTL_Extend_MaterialsBuilder.init();
     }
 }
