@@ -3,7 +3,6 @@ package org.qiuyeqaq.gtl_extend.common.machines.recipes;
 import com.gregtechceu.gtceu.api.capability.recipe.IO;
 import com.gregtechceu.gtceu.api.gui.GuiTextures;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
-import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate;
 import com.gregtechceu.gtceu.common.data.GTSoundEntries;
 
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.*;

@@ -1,18 +1,18 @@
 package org.qiuyeqaq.gtl_extend.api.registries.special;
 
-import com.gregtechceu.gtceu.api.capability.recipe.EURecipeCapability;
-import com.gregtechceu.gtceu.common.data.GTRecipeModifiers;
-import com.gregtechceu.gtceu.data.recipe.builder.GTRecipeBuilder;
 import org.gtlcore.gtlcore.api.machine.multiblock.NoEnergyMultiblockMachine;
 import org.gtlcore.gtlcore.utils.MachineIO;
 
 import com.gregtechceu.gtceu.GTCEu;
+import com.gregtechceu.gtceu.api.capability.recipe.EURecipeCapability;
 import com.gregtechceu.gtceu.api.machine.ConditionalSubscriptionHandler;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.MetaMachine;
 import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.api.recipe.logic.OCParams;
 import com.gregtechceu.gtceu.api.recipe.logic.OCResult;
+import com.gregtechceu.gtceu.common.data.GTRecipeModifiers;
+import com.gregtechceu.gtceu.data.recipe.builder.GTRecipeBuilder;
 import com.gregtechceu.gtceu.utils.FormattingUtil;
 
 import com.lowdragmc.lowdraglib.syncdata.annotation.Persisted;
@@ -28,9 +28,10 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.qiuyeqaq.gtl_extend.config.GTLExtendConfigHolder;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 import java.util.UUID;
+
+import javax.annotation.ParametersAreNonnullByDefault;
 
 import static org.qiuyeqaq.gtl_extend.common.materials.GTL_Extend_Materials.ETERNALBLUEDREAM;
 
@@ -43,6 +44,7 @@ public class AdvancedHarmonyMachine extends NoEnergyMultiblockMachine {
 
     @Persisted
     private long currentEUt;
+
     private long getRecipeEUt() {
         return currentEUt;
     }
@@ -127,10 +129,12 @@ public class AdvancedHarmonyMachine extends NoEnergyMultiblockMachine {
 
         return Math.min(parallel, Long.MAX_VALUE - 1);
     }
+
     // 添加 getMaxInputVoltage 方法
     private long getMaxInputVoltage() {
         return Long.MAX_VALUE; // 根据实际逻辑调整
     }
+
     // 获取功率倍数（机器电压/配方需求）
     private double getPowerMultiplier() {
         long machineVoltage = getMaxInputVoltage();
@@ -181,12 +185,13 @@ public class AdvancedHarmonyMachine extends NoEnergyMultiblockMachine {
                 .input(EURecipeCapability.CAP, modifiedEUt)
                 .duration((int) (recipe.duration * durationMultiplier))
                 .buildRawRecipe(); // 使用 buildRawRecipe() 返回 GTRecipe 对象
-
     }
+
     private int getOverclockLevel() {
         // 示例逻辑：根据电路配置返回超频等级
         return (int) circuitConfig - 1; // 假设电路配置 1-4 对应等级 0-3
     }
+
     // 处理配方修改
     @Nullable
     public static GTRecipe recipeModifier(MetaMachine machine, GTRecipe recipe) {
@@ -210,6 +215,7 @@ public class AdvancedHarmonyMachine extends NoEnergyMultiblockMachine {
                 .duration(recipe.duration / (1 << ocLevel))
                 .buildRawRecipe(); // 返回 GTRecipe 实例
     }
+
     @Override
     public void onStructureFormed() {
         super.onStructureFormed();

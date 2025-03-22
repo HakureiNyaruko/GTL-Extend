@@ -1,5 +1,8 @@
 package org.qiuyeqaq.gtl_extend.common.machines.machines;
 
+import org.gtlcore.gtlcore.client.renderer.machine.EyeOfHarmonyRenderer;
+import org.gtlcore.gtlcore.utils.TextUtil;
+
 import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.data.RotationState;
 import com.gregtechceu.gtceu.api.machine.MachineDefinition;
@@ -18,11 +21,6 @@ import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 
-import org.gtlcore.gtlcore.client.renderer.machine.EyeOfHarmonyRenderer;
-import org.gtlcore.gtlcore.common.data.GTLBlocks;
-import org.gtlcore.gtlcore.common.data.GTLRecipeTypes;
-import org.gtlcore.gtlcore.utils.Registries;
-import org.gtlcore.gtlcore.utils.TextUtil;
 import org.qiuyeqaq.gtl_extend.api.registries.GTLEXRegistration;
 import org.qiuyeqaq.gtl_extend.api.registries.special.AdvancedHarmonyMachine;
 import org.qiuyeqaq.gtl_extend.common.data.GTL_Extend_CreativeModeTabs;
