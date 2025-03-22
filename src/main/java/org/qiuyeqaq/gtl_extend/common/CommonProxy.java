@@ -56,7 +56,7 @@ public class CommonProxy {
         GTL_Extend_RecipeTypes.init();
     }
 
-    protected void registerMachines(GTCEuAPI.RegisterEvent<ResourceLocation, MachineDefinition> event) {
+    private void registerMachines(GTCEuAPI.RegisterEvent<ResourceLocation, MachineDefinition> event) {
         GTL_Extend_Machines.init();
     }
 }
