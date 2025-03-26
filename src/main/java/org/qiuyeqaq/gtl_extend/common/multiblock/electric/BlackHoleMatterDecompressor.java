@@ -187,6 +187,10 @@ public class BlackHoleMatterDecompressor extends NoEnergyMultiblockMachine {
         // 3. 计算整数超频次数（向下取整）
         long overclockTimes = limitedEUt / baseEUt;
 
+        // 应用电路配置的功率倍率
+        double circuitMultiplier = getCircuitPowerMultiplier();
+        overclockTimes = (long) (overclockTimes * circuitMultiplier);
+
         // 4. 限制最小值为 1（不允许降频或零超频）
         return Math.max(overclockTimes, 1L);
     }
@@ -391,6 +395,16 @@ public class BlackHoleMatterDecompressor extends NoEnergyMultiblockMachine {
             case 3 -> "16.0";
             case 4 -> "64.0";
             default -> "1.0";
+        };
+    }
+
+    // 新增方法：获取电路配置对应的功率倍率
+    private double getCircuitPowerMultiplier() {
+        return switch (this.circuitConfig) {
+            case 2 -> 4.0;
+            case 3 -> 16.0;
+            case 4 -> 64.0;
+            default -> 1.0;
         };
     }
 }
