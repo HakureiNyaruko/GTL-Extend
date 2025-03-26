@@ -24,7 +24,7 @@ public class CustomRecipe {
             String[] tiers = { "lv", "mv", "hv", "ev", "iv", "luv", "zpm", "uv", "uhv", "uev", "uiv", "uxv", "opv", "max" };
 
             // 生成 LV 配方（基础）
-            SUPRACHRONAL_ASSEMBLY_LINE_RECIPES.recipeBuilder("gtl_extend:eternalbluedream_lv_processor_mainframe")
+            SUPRACHRONAL_ASSEMBLY_LINE_RECIPES.recipeBuilder("eternalbluedream_lv_processor_mainframe")
                     .inputItems(Registries.getItem("minecraft:sand"), 64)
                     .inputFluids(GTL_Extend_Materials.ETERNALBLUEDREAM.getFluid(9216))
                     .outputItems(Gtl_extend_Item.ETERNALBLUE_DREAM_LV_PROCESSOR_MAINFRAME.get())
@@ -37,7 +37,7 @@ public class CustomRecipe {
                 String currentTier = tiers[i];
                 String prevTier = tiers[i - 1];
 
-                SUPRACHRONAL_ASSEMBLY_LINE_RECIPES.recipeBuilder("gtl_extend:eternalbluedream_" + currentTier + "_processor_mainframe")
+                SUPRACHRONAL_ASSEMBLY_LINE_RECIPES.recipeBuilder("eternalbluedream_" + currentTier + "_processor_mainframe")
                         .inputItems(getItemEntry(prevTier).get()) // 输入前一级物品
                         .inputFluids(GTL_Extend_Materials.ETERNALBLUEDREAM.getFluid(9216)) // 固定流体输入
                         .outputItems(getItemEntry(currentTier).get()) // 输出当前级物品

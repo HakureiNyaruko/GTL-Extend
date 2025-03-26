@@ -37,7 +37,6 @@ import java.util.function.Consumer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Transformation;
-import org.gtlcore.gtlcore.GTLCore;
 import org.gtlcore.gtlcore.client.ClientUtil;
 import org.joml.Quaternionf;
 
@@ -53,7 +52,7 @@ public class BlackHoleMatterDecompressor_Render extends WorkableCasingMachineRen
     private static final int DISK_LAYERS = 3;
 
     public BlackHoleMatterDecompressor_Render() {
-        super(GTLCore.id("block/casings/hpca/high_power_casing"), GTCEu.id("block/multiblock/cosmos_simulation"));
+        super(GTCEu.id("block/casings/hpca/high_power_casing"), GTCEu.id("block/multiblock/cosmos_simulation"));
     }
 
     @Override
@@ -202,21 +201,11 @@ public class BlackHoleMatterDecompressor_Render extends WorkableCasingMachineRen
     // 多方块部件渲染（与原代码类似）
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void renderPartModel(List<BakedQuad> list, IMultiController controller, IMultiPart part,
-                                Direction side, @Nullable Direction face, RandomSource random,
-                                Direction modelFacing, ModelState modelState) {
-        if (face != null && modelFacing != null) {
-            // 正确传递参数：第二个参数应为 TextureAtlasSprite
-            BakedQuad quad = FaceQuad.bakeFace(
-                    modelFacing, // Direction face
-                    ModelFactory.getBlockSprite(GTCEu.id("block/casings/event_horizon_casing")), // TextureAtlasSprite
-                    modelState,  // ModelState rotation
-                    0xFF0000,          // int tintIndex
-                    15,          // int emissivity
-                    true,        // boolean cull
-                    false        // boolean shade
-            );
-            list.add(quad);
+    public void renderPartModel(List<BakedQuad> list, IMultiController iMultiController, IMultiPart iMultiPart,
+                                Direction direction, @Nullable Direction direction1, RandomSource randomSource,
+                                Direction direction2, ModelState modelState) {
+        if (direction1 != null && direction2 != null) {
+            list.add(FaceQuad.bakeFace(direction2, ModelFactory.getBlockSprite(GTCEu.id("block/casings/hpca/high_power_casing")), modelState));
         }
     }
 

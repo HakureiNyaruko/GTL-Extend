@@ -29,7 +29,6 @@ import org.jetbrains.annotations.Nullable;
 import org.qiuyeqaq.gtl_extend.config.GTLExtendConfigHolder;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -45,7 +44,7 @@ import org.gtlcore.gtlcore.utils.MachineIO;
 public class BlackHoleMatterDecompressor extends NoEnergyMultiblockMachine {
 
     // 最大安全 EU 值（根据实际需求调整）
-    private static final long MAX_SAFE_EUT = Long.MAX_VALUE / 1024;
+    private static final long MAX_SAFE_EUT = Long.MAX_VALUE - 1;
 
     // 添加配置依赖判断方法
     private boolean isInfinityDreamEnabled() {
@@ -142,13 +141,13 @@ public class BlackHoleMatterDecompressor extends NoEnergyMultiblockMachine {
     }
 
     // 获取当前并行数
-    private long calculateParallel() {
-        long parallel = BASE_PARALLEL;
+    private int calculateParallel() {
+        int parallel = BASE_PARALLEL;
 
         if (isInfinityDreamEnabled()) {
             // 永恒蓝梦模式逻辑
             long buckets = (long) (eternalbluedream / 1000);
-            parallel += buckets * PARALLEL_PER_BUCKET;
+            parallel += (int) Math.min(buckets * PARALLEL_PER_BUCKET, Integer.MAX_VALUE - parallel);
 
             // 超频处理
             boolean overclock = parallel > OVERCLOCK_THRESHOLD;
@@ -163,10 +162,10 @@ public class BlackHoleMatterDecompressor extends NoEnergyMultiblockMachine {
 
         // 公共处理
         if (calculateOverclockTimes() >= POWER_MULTIPLIER_THRESHOLD) {
-            parallel *= 2;
+            parallel = (int) Math.min(parallel * 2L, Integer.MAX_VALUE);
         }
 
-        return Math.min(parallel, Long.MAX_VALUE - 1);
+        return parallel;
     }
 
     /**
@@ -222,44 +221,28 @@ public class BlackHoleMatterDecompressor extends NoEnergyMultiblockMachine {
         }
 
         // ========== 2. 最终参数计算 ==========
-        instance.finalEUt = baseEUt * overclockTimes; // 存储到实例变量
-        long finalEUt = instance.finalEUt; // 保持后续逻辑不变
-        long totalParallel = withParallel ?
-                instance.calculateParallel() : // 并行数已包含超频倍数
-                overclockTimes;
+        instance.finalEUt = baseEUt * overclockTimes;
+        int finalParallel = instance.calculateParallel();
 
-        // ========== 3. 分块处理逻辑 ==========
-        List<GTRecipe> batchRecipes = new ArrayList<>();
-        long remainingParallel = totalParallel;
+        // 直接生成单个配方，并行数限制在Integer.MAX_VALUE
+        GTRecipe modifiedRecipe = buildSingleRecipe(instance, recipe, instance.finalEUt,
+                calculateDuration(instance, recipe, withParallel), finalParallel);
 
-        while (remainingParallel > 0) {
-            // 3.1 计算分块大小
-            int batchSize = (int) Math.min(remainingParallel, Integer.MAX_VALUE);
-
-            // 3.2 生成分块配方
-            GTRecipe batchRecipe = buildBatchRecipe(
-                    instance,
-                    recipe,
-                    finalEUt,
-                    calculateDuration(instance, recipe, withParallel),
-                    batchSize);
-
-            if (batchRecipe == null) {
-                GTCEu.LOGGER.warn("[Batch Failed] Failed to process batch size: {}", batchSize);
-                break;
+        // 立即扣除能量
+        if (modifiedRecipe != null && instance.userId != null) {
+            BigInteger totalEnergy = BigInteger.valueOf(instance.finalEUt)
+                    .multiply(BigInteger.valueOf(modifiedRecipe.duration));
+            boolean success = WirelessEnergyManager.addEUToGlobalEnergyMap(
+                    instance.userId,
+                    totalEnergy.negate(),
+                    machine);
+            if (!success) {
+                GTCEu.LOGGER.warn("[Energy Deduct Failed] Insufficient energy");
+                return null;
             }
-
-            // 3.3 累加分块结果
-            batchRecipes.add(batchRecipe);
-            remainingParallel -= batchSize;
         }
 
-        // ========== 4. 合并配方结果 ==========
-        if (!batchRecipes.isEmpty()) {
-            return mergeBatchRecipes(batchRecipes, finalEUt);
-        }
-
-        return null;
+        return modifiedRecipe;
     }
 
     // ========== 工具方法 ==========
@@ -272,45 +255,34 @@ public class BlackHoleMatterDecompressor extends NoEnergyMultiblockMachine {
             default -> 1.0;
         };
 
-        if (!machine.isInfinityDreamEnabled()) {
-            durationMultiplier *= 0.8;
-        }
+        // 溢出保护
+        if (!machine.isInfinityDreamEnabled()) durationMultiplier *= 0.8;
 
         long rawDuration = withParallel ?
                 (long) (recipe.duration * durationMultiplier) :
                 recipe.duration / machine.calculateOverclockTimes();
 
-        // 溢出保护
-        if (rawDuration > Integer.MAX_VALUE) {
-            GTCEu.LOGGER.error("[Overflow] Duration exceeds limit: {} ticks", rawDuration);
-            return Integer.MAX_VALUE;
-        }
-        return (int) rawDuration;
+        return (int) Math.min(rawDuration, Integer.MAX_VALUE);
     }
 
     @Nullable
-    private static GTRecipe buildBatchRecipe(BlackHoleMatterDecompressor machine, GTRecipe original, long eut, int duration, int batchSize) {
+    private static GTRecipe buildSingleRecipe(BlackHoleMatterDecompressor machine, GTRecipe original,
+                                              long eut, int duration, int parallel) {
         try {
-            // 并行化处理
-            GTRecipe parallelRecipe = GTRecipeModifiers.accurateParallel(
-                    machine,
-                    original,
-                    batchSize,
-                    false).getFirst();
-
-            // 构建带能源参数的配方
+            GTRecipe parallelRecipe = GTRecipeModifiers.accurateParallel(machine, original, parallel, false).getFirst();
             return new GTRecipeBuilder(parallelRecipe, original.recipeType)
                     .input(EURecipeCapability.CAP, eut)
                     .duration(duration)
                     .buildRawRecipe();
         } catch (Exception e) {
-            GTCEu.LOGGER.error("[Build Failed] Error processing batch: {}", e.getMessage());
+            GTCEu.LOGGER.error("[Build Failed] Error: {}", e.getMessage());
             return null;
         }
     }
 
     private static GTRecipe mergeBatchRecipes(List<GTRecipe> batches, long totalEUt) {
         // 4.1 使用第一个配方作为模板
+        int totalDuration = batches.stream().mapToInt(recipe -> recipe.duration).sum();
         GTRecipe template = batches.get(0);
         GTRecipeBuilder builder = new GTRecipeBuilder(template, template.recipeType);
 

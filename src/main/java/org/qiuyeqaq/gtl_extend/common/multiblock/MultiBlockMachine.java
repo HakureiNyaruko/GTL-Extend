@@ -77,7 +77,7 @@ public class MultiBlockMachine {
 
         BLACK_HOLE_MATTER_DECOMPRESSOR = GTLEXRegistration.REGISTRATE.multiblock("black_hole_matter_decompressor", BlackHoleMatterDecompressor::new)
                 .rotationState(RotationState.NON_Y_AXIS)
-                .appearanceBlock(GTBlocks.HIGH_POWER_CASING)
+                .appearanceBlock(HIGH_POWER_CASING)
                 .recipeType(GTLRecipeTypes.COSMOS_SIMULATION_RECIPES)
                 .recipeType(GTL_Extend_RecipeTypes.HORIZON_MATTER_DECOMPRESSION_RECIPES)
                 .recipeModifier(BlackHoleMatterDecompressor::recipeModifier)
