@@ -348,7 +348,8 @@ public class BlackHoleMatterDecompressor extends NoEnergyMultiblockMachine {
                         FormattingUtil.formatNumbers(eternalbluedream) + " mB"));
                 textList.add(Component.literal("基础并行: " + BASE_PARALLEL));
             } else {
-                String powerMultiplierDisplay = calculateOverclockTimes() >= Double.MAX_VALUE / 1e3 ? "∞" : FormattingUtil.formatNumbers(calculateOverclockTimes());
+                double actualMultiplier = calculateOverclockTimes() / getCircuitPowerMultiplier(); // 显示纯电网倍率
+                String powerMultiplierDisplay = actualMultiplier >= Double.MAX_VALUE / 1e3 ? "∞" : FormattingUtil.formatNumbers(actualMultiplier);
                 textList.add(Component.literal("当前功率倍率: " + powerMultiplierDisplay));
                 // 显示无线电网允许的最大功率（仅在非蓝梦模式下显示）
                 if (userId != null) {

@@ -10,8 +10,10 @@ import com.gregtechceu.gtceu.api.machine.MultiblockMachineDefinition;
 import com.gregtechceu.gtceu.api.machine.multiblock.PartAbility;
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableElectricMultiblockMachine;
 import com.gregtechceu.gtceu.api.pattern.Predicates;
+import com.gregtechceu.gtceu.api.recipe.OverclockingLogic;
 import com.gregtechceu.gtceu.common.data.GCyMRecipeTypes;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
+import com.gregtechceu.gtceu.common.data.GTRecipeModifiers;
 import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
 
 import net.minecraft.network.chat.Component;
@@ -58,7 +60,7 @@ public class MultiBlockMachine {
                 .recipeType(GTRecipeTypes.ALLOY_SMELTER_RECIPES)
                 .recipeType(GCyMRecipeTypes.ALLOY_BLAST_RECIPES)
                 .tooltips(Component.literal(TextUtil.full_color("由GTL_Extend添加")))
-                .appearanceBlock(GTBlocks.HIGH_TEMPERATURE_HAZARD_SIGN_BLOCK)
+                .recipeModifiers(GTRecipeModifiers.PARALLEL_HATCH, GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.PERFECT_OVERCLOCK_SUBTICK))
                 .pattern(definition -> MultiBlockStructure.GENERAL_ENERGY_FURNACE
                         .where('~', Predicates.controller(blocks(definition.getBlock())))
                         .where(' ', Predicates.any())
@@ -78,13 +80,14 @@ public class MultiBlockMachine {
                 .workableCasingRenderer(GTCEu.id("block/casings/gcym/high_temperature_smelting_casing"),
                         GTCEu.id("block/multiblock/fusion_reactor"), false)
                 .register();
+
         BLACK_HOLE_MATTER_DECOMPRESSOR = GTLEXRegistration.REGISTRATE.multiblock("black_hole_matter_decompressor", BlackHoleMatterDecompressor::new)
                 .rotationState(RotationState.NON_Y_AXIS)
                 .recipeType(GTLRecipeTypes.COSMOS_SIMULATION_RECIPES)
                 .recipeType(GTL_Extend_RecipeTypes.HORIZON_MATTER_DECOMPRESSION_RECIPES)
                 .recipeModifier(BlackHoleMatterDecompressor::recipeModifier)
                 .tooltips(Component.literal(TextUtil.full_color("由GTL_Extend添加")))
-                .appearanceBlock(GTBlocks.HIGH_POWER_CASING)
+                .appearanceBlock(HIGH_POWER_CASING)
                 .pattern(definition -> BlackHoleMatterDecompressor_MultiBlockStructure.BLACK_HOLE_DECOMPRESSION
                         .where('~', Predicates.controller(blocks(definition.getBlock())))
                         .where(" ", Predicates.any())
