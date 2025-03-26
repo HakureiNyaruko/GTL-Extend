@@ -1,0 +1,7 @@
+{
+  "superfluid_general_energy_furnace":"超流态通能炉",
+  "black_hole_matter_decompressor":"黑洞物质解压器",
+  "horizon_matter_decompression": "视界物质掠夺",
+  "gtl_extend.machine.mode":"当前模式: %s",
+  "gtl_extend.machine.circuit":"电路配置: %d (x%s 功率)"
+}
