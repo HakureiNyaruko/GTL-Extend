@@ -37,6 +37,7 @@ import java.util.function.Consumer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Transformation;
+import org.gtlcore.gtlcore.GTLCore;
 import org.gtlcore.gtlcore.client.ClientUtil;
 import org.joml.Quaternionf;
 
@@ -52,7 +53,7 @@ public class BlackHoleMatterDecompressor_Render extends WorkableCasingMachineRen
     private static final int DISK_LAYERS = 3;
 
     public BlackHoleMatterDecompressor_Render() {
-        super(GTCEu.id("block/casings/hpca/high_power_casing"), GTCEu.id("block/multiblock/cosmos_simulation"));
+        super(GTLCore.id("block/casings/hpca/high_power_casing"), GTCEu.id("block/multiblock/cosmos_simulation"));
     }
 
     @Override

@@ -36,12 +36,6 @@ public class MultiBlockMachine {
     public static final MultiblockMachineDefinition SUPERFLUID_GENERAL_ENERGY_FURNACE;
     public static final MultiblockMachineDefinition BLACK_HOLE_MATTER_DECOMPRESSOR;
 
-    /*
-     * public static final BiConsumer<ItemStack, List<Component>> GTL_EX_ADD = (itemStack, components) -> components
-     * .add(Component.translatable("Gtl.registry.add")
-     * .withStyle(style -> style.withColor(TooltipHelper.RAINBOW_SLOW.getCurrent())));
-     */
-
     static {
         GTLEXRegistration.REGISTRATE.creativeModeTab(() -> GTL_Extend_CreativeModeTabs.MACHINES_ITEM);
     }
@@ -83,11 +77,11 @@ public class MultiBlockMachine {
 
         BLACK_HOLE_MATTER_DECOMPRESSOR = GTLEXRegistration.REGISTRATE.multiblock("black_hole_matter_decompressor", BlackHoleMatterDecompressor::new)
                 .rotationState(RotationState.NON_Y_AXIS)
+                .appearanceBlock(GTBlocks.HIGH_POWER_CASING)
                 .recipeType(GTLRecipeTypes.COSMOS_SIMULATION_RECIPES)
                 .recipeType(GTL_Extend_RecipeTypes.HORIZON_MATTER_DECOMPRESSION_RECIPES)
                 .recipeModifier(BlackHoleMatterDecompressor::recipeModifier)
                 .tooltips(Component.literal(TextUtil.full_color("由GTL_Extend添加")))
-                .appearanceBlock(HIGH_POWER_CASING)
                 .pattern(definition -> BlackHoleMatterDecompressor_MultiBlockStructure.BLACK_HOLE_DECOMPRESSION
                         .where('~', Predicates.controller(blocks(definition.getBlock())))
                         .where(" ", Predicates.any())
