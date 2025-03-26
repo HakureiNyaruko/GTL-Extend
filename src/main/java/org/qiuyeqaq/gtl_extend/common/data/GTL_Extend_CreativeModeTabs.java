@@ -39,7 +39,7 @@ public class GTL_Extend_CreativeModeTabs {
 
         GTL_EX_GT_ITEM = GTLEXRegistration.REGISTRATE.defaultCreativeTab("gtl_ex_gt_item", (builder) -> {
             builder.displayItems(new RegistrateDisplayItemsGenerator("gtl_ex_gt_item", GTLEXRegistration.REGISTRATE))
-                    .icon(Gtl_extend_Item.ULTMATE_SINGULARITY::asStack)
+                    .icon(Gtl_extend_Item.FOREVER::asStack)
                     .title(GTLEXRegistration.REGISTRATE.addLang("itemGroup", Gtl_extend.id("gtl_ex_gt_item"), "GTL Extend GT Items"))
                     .build();
         }).register();

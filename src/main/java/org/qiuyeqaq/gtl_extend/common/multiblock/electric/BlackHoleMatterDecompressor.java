@@ -117,7 +117,7 @@ public class BlackHoleMatterDecompressor extends NoEnergyMultiblockMachine {
 
     public long getRecipeEUt() {
         // 返回自定义启动耗能（若需动态计算可在此扩展）
-        return BASE_STARTUP_EUT;
+        return this.finalEUt;
     }
 
     // 每20tick更新资源
@@ -131,7 +131,7 @@ public class BlackHoleMatterDecompressor extends NoEnergyMultiblockMachine {
             }
 
             // 检测电路配置（优先级4 > 3 > 2 > 1）
-            circuitConfig = 1;
+            circuitConfig = 0;
             for (int i = 4; i >= 1; i--) {
                 if (MachineIO.notConsumableCircuit(this, i)) {
                     circuitConfig = i;
@@ -218,9 +218,10 @@ public class BlackHoleMatterDecompressor extends NoEnergyMultiblockMachine {
         }
 
         // ========== 2. 最终参数计算 ==========
-        long finalEUt = baseEUt * overclockTimes;
+        instance.finalEUt = baseEUt * overclockTimes; // 存储到实例变量
+        long finalEUt = instance.finalEUt; // 保持后续逻辑不变
         long totalParallel = withParallel ?
-                instance.calculateParallel() * overclockTimes : // 合并并行数和超频倍数
+                instance.calculateParallel() : // 并行数已包含超频倍数
                 overclockTimes;
 
         // ========== 3. 分块处理逻辑 ==========
@@ -335,7 +336,7 @@ public class BlackHoleMatterDecompressor extends NoEnergyMultiblockMachine {
         super.addDisplayText(textList);
         if (isFormed()) {
             // 模式状态显示
-            textList.add(Component.translatable("gtl_extend.machine.mode",
+            textList.add(Component.translatable("gtl_extend_machine_mode",
                     isInfinityDreamEnabled() ? "蓝梦模式" : "功率模式"));
 
             if (isInfinityDreamEnabled()) {
@@ -370,7 +371,7 @@ public class BlackHoleMatterDecompressor extends NoEnergyMultiblockMachine {
             // 公共信息
             textList.add(Component.literal("启动耗能：" + FormattingUtil.formatNumbers(getRecipeEUt()) + "EU"));
             textList.add(Component.literal("最终并行: " + calculateParallel()));
-            textList.add(Component.translatable("gtl_extend.machine.circuit",
+            textList.add(Component.translatable("gtl_extend_machine_circuit",
                     circuitConfig, getPowerMultiplier((int) circuitConfig)));
         }
     }

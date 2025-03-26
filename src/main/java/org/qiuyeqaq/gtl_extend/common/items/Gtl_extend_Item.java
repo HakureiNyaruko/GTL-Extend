@@ -15,11 +15,9 @@ public class Gtl_extend_Item {
         REGISTRATE.creativeModeTab(() -> GTL_Extend_CreativeModeTabs.GTL_EX_GT_ITEM);
     }
 
-    public static final ItemEntry<Item> ULTMATE_SINGULARITY = REGISTRATE.item("ultmate_singularity", Item::new)
-            .lang("Ultimate Singularity")
+    public static final ItemEntry<Item> FOREVER = REGISTRATE.item("forever", Item::new)
+            .lang("Forever")
             .register();
-
-    public static void init() {}
 
     public static final ItemEntry<Item> ETERNALBLUE_DREAM_LV_PROCESSOR_MAINFRAME = registerMainframe("lv");
     public static final ItemEntry<Item> ETERNALBLUE_DREAM_MV_PROCESSOR_MAINFRAME = registerMainframe("mv");
@@ -43,4 +41,6 @@ public class Gtl_extend_Item {
                 .lang("Eternal Blue Dream " + tier.toUpperCase() + " Processor Mainframe")
                 .register();
     }
+
+    public static void init() {}
 }

@@ -209,7 +209,6 @@ public class BlackHoleMatterDecompressor_Render extends WorkableCasingMachineRen
             BakedQuad quad = FaceQuad.bakeFace(
                     modelFacing, // Direction face
                     ModelFactory.getBlockSprite(GTCEu.id("block/casings/event_horizon_casing")), // TextureAtlasSprite
-                                                                                                 // sprite
                     modelState,  // ModelState rotation
                     0xFF0000,          // int tintIndex
                     15,          // int emissivity
