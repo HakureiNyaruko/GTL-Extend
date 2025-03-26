@@ -205,15 +205,17 @@ public class BlackHoleMatterDecompressor_Render extends WorkableCasingMachineRen
                                 Direction side, @Nullable Direction face, RandomSource random,
                                 Direction modelFacing, ModelState modelState) {
         if (face != null && modelFacing != null) {
-            list.add(FaceQuad.bakeFace(
-                    modelFacing,
-                    ModelFactory.getBlockSprite(GTCEu.id("block/casings/event_horizon_casing")),
-                    modelState, // 使用传入的ModelState
-                    0xFFFFFFFF, // 白色不透明
-                    OverlayTexture.NO_OVERLAY,
-                    true,  // 应用Diffuse
-                    false  // 不翻转
-            ));
+            // 正确传递参数：第二个参数应为 TextureAtlasSprite
+            BakedQuad quad = FaceQuad.bakeFace(
+                    modelFacing, // Direction face
+                    ModelFactory.getBlockSprite(GTCEu.id("block/casings/event_horizon_casing")), // TextureAtlasSprite sprite
+                    modelState,  // ModelState rotation
+                    0xFF0000,          // int tintIndex
+                    15,          // int emissivity
+                    true,        // boolean cull
+                    false        // boolean shade
+            );
+            list.add(quad);
         }
     }
 
