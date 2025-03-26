@@ -8,12 +8,13 @@ dependencies {
         it.officialMojangMappings { nameSyntheticMembers = false }
     }
 
+    annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
+
     modCompileOnly("mezz.jei:jei-$project.minecraft_version-forge-api:$project.jei_version") { transitive = false }
     modCompileOnly("mezz.jei:jei-$project.minecraft_version-common-api:$project.jei_version") { transitive = false }
 
     modImplementation("com.gregtechceu.gtceu:gtceu-$project.minecraft_version:$project.gtceu_version") { transitive = false }
-    modImplementation("com.gregtechceu.gtceu:gtceu-$project.minecraft_version:$project.gtceu_version") { transitive = false }
-    // modImplementation("dev:gtceu:1.20.1:$project.gtceu_version") { transitive false }
+    modImplementation("dev:gtceu:1.20.1:$project.gtceu_version") { transitive = false }
     modImplementation("com.lowdragmc.ldlib:ldlib-forge-$project.minecraft_version:$project.ldlib_version") { transitive = false }
     modImplementation("com.tterrag.registrate:Registrate:$project.registrate_version")
     modImplementation("dev.latvian.mods:kubejs-forge:$project.kubejs_version")
@@ -69,7 +70,7 @@ dependencies {
 
     modRuntimeOnly("dev:rubidium-extra:0.5.4.3+mc1.20.1-build.121")
 
-    modRuntimeOnly("dev:jecharacters:1.20.1-forge-4.5.11")
+    //modRuntimeOnly("dev:jecharacters:1.20.1-forge-4.5.11")
 
     forgeRuntimeLibrary(runtimeOnly("icyllis.modernui:ModernUI-Core:3.10.1")) // Modern UI core framework
     forgeRuntimeLibrary(runtimeOnly("icyllis.modernui:ModernUI-Markdown:3.10.1")) { transitive = false }

@@ -12,5 +12,6 @@ spotless {
         removeUnusedImports('cleanthat-javaparser-unnecessaryimport')
         endWithNewline()
         eclipse('4.31').configFile(formatFile)
+
     }
 }

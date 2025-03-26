@@ -9,7 +9,9 @@ loom {
             mod(mod_id)
         }
     }
-
+    mixin {
+        defaultRefmapName = "gtl_extend.refmap.json"
+    }
     runConfigs.named("data").configure {
         programArg("--existing=" + file("src/main/resources").absolutePath)
     }

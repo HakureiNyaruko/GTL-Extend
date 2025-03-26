@@ -1,5 +1,8 @@
 package org.qiuyeqaq.gtl_extend.api.registries;
 
+import static com.gregtechceu.gtceu.common.data.GTMachines.*;
+import static org.qiuyeqaq.gtl_extend.api.registries.GTLEXRegistration.REGISTRATE;
+
 import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.GTCEuAPI;
 import com.gregtechceu.gtceu.api.GTValues;
@@ -28,11 +31,7 @@ import com.gregtechceu.gtceu.api.registry.registrate.CompassNode;
 import com.gregtechceu.gtceu.api.registry.registrate.CompassSection;
 import com.gregtechceu.gtceu.api.registry.registrate.MachineBuilder;
 import com.gregtechceu.gtceu.api.registry.registrate.MultiblockMachineBuilder;
-import com.gregtechceu.gtceu.client.renderer.machine.BatteryBufferRenderer;
-import com.gregtechceu.gtceu.client.renderer.machine.ChargerRenderer;
-import com.gregtechceu.gtceu.client.renderer.machine.SimpleGeneratorMachineRenderer;
-import com.gregtechceu.gtceu.client.renderer.machine.TransformerRenderer;
-import com.gregtechceu.gtceu.client.renderer.machine.WorkableSteamMachineRenderer;
+import com.gregtechceu.gtceu.client.renderer.machine.*;
 import com.gregtechceu.gtceu.common.data.GTCompassNodes;
 import com.gregtechceu.gtceu.common.data.GTCompassSections;
 import com.gregtechceu.gtceu.common.data.GTMedicalConditions;
@@ -45,14 +44,15 @@ import com.gregtechceu.gtceu.common.machine.multiblock.part.LaserHatchPartMachin
 import com.gregtechceu.gtceu.config.ConfigHolder;
 import com.gregtechceu.gtceu.utils.FormattingUtil;
 
-import com.lowdragmc.lowdraglib.side.fluid.FluidStack;
-
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
+import com.lowdragmc.lowdraglib.side.fluid.FluidStack;
+
 import it.unimi.dsi.fastutil.Pair;
 import it.unimi.dsi.fastutil.ints.Int2LongFunction;
+
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -60,12 +60,7 @@ import java.util.Locale;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 
-import static com.gregtechceu.gtceu.common.data.GTMachines.*;
-import static org.qiuyeqaq.gtl_extend.api.registries.GTLEXRegistration.REGISTRATE;
-
 public class MachinesRegister {
-
-    public MachinesRegister() {}
 
     public static BiConsumer<ItemStack, List<Component>> createCreativeTooltips(boolean share) {
         return (stack, list) -> {
@@ -114,6 +109,7 @@ public class MachinesRegister {
             }).tier(tier);
             definitions[tier] = (MachineDefinition) builder.apply(tier, register);
         }
+
         return definitions;
     }
 
@@ -233,6 +229,7 @@ public class MachinesRegister {
             }).tier(tier);
             definitions[tier] = (MultiblockMachineDefinition) builder.apply(tier, register);
         }
+
         return definitions;
     }
 }

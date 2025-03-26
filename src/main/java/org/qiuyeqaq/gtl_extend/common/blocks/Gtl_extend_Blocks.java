@@ -1,5 +1,7 @@
 package org.qiuyeqaq.gtl_extend.common.blocks;
 
+import static org.qiuyeqaq.gtl_extend.api.registries.GTLEXRegistration.REGISTRATE;
+
 import com.gregtechceu.gtceu.api.item.tool.GTToolType;
 import com.gregtechceu.gtceu.common.data.GTModels;
 
@@ -14,12 +16,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.nullness.NonNullFunction;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
+
 import org.qiuyeqaq.gtl_extend.Gtl_extend;
 import org.qiuyeqaq.gtl_extend.common.data.GTL_Extend_CreativeModeTabs;
 
 import java.util.function.Supplier;
-
-import static org.qiuyeqaq.gtl_extend.api.registries.GTLEXRegistration.REGISTRATE;
 
 public class Gtl_extend_Blocks {
 
@@ -51,5 +52,5 @@ public class Gtl_extend_Blocks {
     }
 
     @SuppressWarnings("all")
-    public static final BlockEntry<Block> DIMENSION_CORE = createCasingBlock("dimension_core", Gtl_extend.id("block/dimension_core"));
+    public static final BlockEntry<Block> DIMENSION_CORE = createCasingBlock("dimension_core", Gtl_extend.id("block_dimension_core"));
 }

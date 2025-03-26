@@ -1,5 +1,7 @@
 package org.qiuyeqaq.gtl_extend.common;
 
+import static org.qiuyeqaq.gtl_extend.api.registries.GTLEXRegistration.REGISTRATE;
+
 import com.gregtechceu.gtceu.api.GTCEuAPI;
 import com.gregtechceu.gtceu.api.data.chemical.material.event.MaterialEvent;
 import com.gregtechceu.gtceu.api.data.chemical.material.event.MaterialRegistryEvent;
@@ -14,12 +16,10 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import org.qiuyeqaq.gtl_extend.Gtl_extend;
 import org.qiuyeqaq.gtl_extend.common.data.GTL_Extend_CreativeModeTabs;
-import org.qiuyeqaq.gtl_extend.common.machines.machines.GTL_Extend_Machines;
 import org.qiuyeqaq.gtl_extend.common.machines.recipes.GTL_Extend_RecipeTypes;
 import org.qiuyeqaq.gtl_extend.common.materials.GTL_Extend_Materials;
+import org.qiuyeqaq.gtl_extend.common.multiblock.MultiBlockMachine;
 import org.qiuyeqaq.gtl_extend.config.GTLExtendConfigHolder;
-
-import static org.qiuyeqaq.gtl_extend.api.registries.GTLEXRegistration.REGISTRATE;
 
 public class CommonProxy {
 
@@ -57,6 +57,6 @@ public class CommonProxy {
     }
 
     private void registerMachines(GTCEuAPI.RegisterEvent<ResourceLocation, MachineDefinition> event) {
-        GTL_Extend_Machines.init();
+        MultiBlockMachine.init();
     }
 }

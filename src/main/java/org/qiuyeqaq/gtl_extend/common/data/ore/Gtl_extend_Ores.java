@@ -22,7 +22,7 @@ public class Gtl_extend_Ores extends GTOres {
                         .density(0.3F)
                         .weight(25)
                         .layer(WorldGenLayers.STONE)
-                        .heightRangeUniform(-10, 50)
+                        .heightRangeUniform(1, 50)
                         .biomes(BiomeTags.IS_OVERWORLD)
                         .layeredVeinGenerator((generator) -> generator
                                 .withLayerPattern(() -> GTLayerPattern.builder(OVERWORLD_RULES)

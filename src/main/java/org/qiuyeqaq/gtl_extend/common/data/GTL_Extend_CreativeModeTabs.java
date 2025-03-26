@@ -1,15 +1,16 @@
 package org.qiuyeqaq.gtl_extend.common.data;
 
+import static com.gregtechceu.gtceu.common.data.GTCreativeModeTabs.*;
+
 import net.minecraft.world.item.CreativeModeTab;
 
 import com.tterrag.registrate.util.entry.RegistryEntry;
+
 import org.qiuyeqaq.gtl_extend.Gtl_extend;
 import org.qiuyeqaq.gtl_extend.api.registries.GTLEXRegistration;
 import org.qiuyeqaq.gtl_extend.common.blocks.Gtl_extend_Blocks;
 import org.qiuyeqaq.gtl_extend.common.items.Gtl_extend_Item;
-import org.qiuyeqaq.gtl_extend.common.machines.machines.GTL_Extend_Machines;
-
-import static com.gregtechceu.gtceu.common.data.GTCreativeModeTabs.*;
+import org.qiuyeqaq.gtl_extend.common.multiblock.MultiBlockMachine;
 
 public class GTL_Extend_CreativeModeTabs {
 
@@ -24,7 +25,7 @@ public class GTL_Extend_CreativeModeTabs {
     static {
         MACHINES_ITEM = GTLEXRegistration.REGISTRATE.defaultCreativeTab("machines_item", (builder) -> {
             builder.displayItems(new RegistrateDisplayItemsGenerator("machines_item", GTLEXRegistration.REGISTRATE))
-                    .icon(GTL_Extend_Machines.SUPERFLUID_GENERAL_ENERGY_FURNACE::asStack)
+                    .icon(MultiBlockMachine.SUPERFLUID_GENERAL_ENERGY_FURNACE::asStack)
                     .title(GTLEXRegistration.REGISTRATE.addLang("itemGroup", Gtl_extend.id("machines_item"), "GTL Extend Machines Items"))
                     .build();
         }).register();

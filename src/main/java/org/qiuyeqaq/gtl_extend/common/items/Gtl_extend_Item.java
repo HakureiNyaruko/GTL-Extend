@@ -1,12 +1,13 @@
 package org.qiuyeqaq.gtl_extend.common.items;
 
+import static com.gregtechceu.gtceu.common.data.GTItems.*;
+import static org.qiuyeqaq.gtl_extend.api.registries.GTLEXRegistration.*;
+
 import net.minecraft.world.item.Item;
 
 import com.tterrag.registrate.util.entry.ItemEntry;
-import org.qiuyeqaq.gtl_extend.common.data.GTL_Extend_CreativeModeTabs;
 
-import static com.gregtechceu.gtceu.common.data.GTItems.*;
-import static org.qiuyeqaq.gtl_extend.api.registries.GTLEXRegistration.*;
+import org.qiuyeqaq.gtl_extend.common.data.GTL_Extend_CreativeModeTabs;
 
 public class Gtl_extend_Item {
 
