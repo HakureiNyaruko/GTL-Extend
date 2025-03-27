@@ -155,7 +155,7 @@ public class BlackHoleMatterDecompressor_Render extends WorkableCasingMachineRen
         // 定义光晕的包围盒（中心对齐，尺寸1x1x1）
         AABB glowAABB = new AABB(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5);
 
-        // 创建 ModelState（假设 SimpleModelState 可用）
+        // 创建 ModelState
         ModelState modelState = new SimpleModelState(Transformation.identity(), false);
 
         // 基础变换
@@ -172,17 +172,16 @@ public class BlackHoleMatterDecompressor_Render extends WorkableCasingMachineRen
                 Direction.UP,           // 面方向
                 ModelFactory.getBlockSprite(GLOW_TEXTURE), // 纹理
                 modelState,             // ModelState
+                0x80FFFFFF,             // ARGB颜色（半透明白色）
                 15,
-                OverlayTexture.NO_OVERLAY, // 覆盖纹理
-                false,                  // 不应用Diffuse Lighting
-                false                   // 不翻转面
-        );
+                false,             // 不应用Diffuse Lighting
+                false);
 
         // 将 BakedQuad 写入 VertexConsumer
         glowBuffer.putBulkData(
                 poseStack.last(),       // Pose
                 glowQuad,               // BakedQuad
-                1.0f, 1.0f, 1.0f,      // RGB颜色乘数（此处保持原色）
+                1.0f, 1.0f, 1.0f,      // RGB颜色乘数
                 LightTexture.FULL_BRIGHT, // 光照
                 OverlayTexture.NO_OVERLAY // 覆盖纹理
         );

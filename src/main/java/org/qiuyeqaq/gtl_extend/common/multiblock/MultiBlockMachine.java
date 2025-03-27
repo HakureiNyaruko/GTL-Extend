@@ -3,6 +3,7 @@ package org.qiuyeqaq.gtl_extend.common.multiblock;
 import static com.gregtechceu.gtceu.api.pattern.Predicates.blocks;
 import static com.gregtechceu.gtceu.common.data.GCyMBlocks.CASING_HIGH_TEMPERATURE_SMELTING;
 import static com.gregtechceu.gtceu.common.data.GTBlocks.HIGH_POWER_CASING;
+import static org.qiuyeqaq.gtl_extend.common.multiblock.GTL_Extend_MultiBlockMachineModifier.*;
 
 import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.data.RotationState;
@@ -10,11 +11,9 @@ import com.gregtechceu.gtceu.api.machine.MultiblockMachineDefinition;
 import com.gregtechceu.gtceu.api.machine.multiblock.PartAbility;
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableElectricMultiblockMachine;
 import com.gregtechceu.gtceu.api.pattern.Predicates;
+import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.api.recipe.OverclockingLogic;
-import com.gregtechceu.gtceu.common.data.GCyMRecipeTypes;
-import com.gregtechceu.gtceu.common.data.GTBlocks;
-import com.gregtechceu.gtceu.common.data.GTRecipeModifiers;
-import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
+import com.gregtechceu.gtceu.common.data.*;
 
 import net.minecraft.network.chat.Component;
 
@@ -53,13 +52,25 @@ public class MultiBlockMachine {
                 .recipeType(GTRecipeTypes.BLAST_RECIPES)
                 .recipeType(GTRecipeTypes.ALLOY_SMELTER_RECIPES)
                 .recipeType(GCyMRecipeTypes.ALLOY_BLAST_RECIPES)
-                .tooltips(Component.literal(TextUtil.full_color("由GTL_Extend添加")))
                 .recipeModifiers(GTRecipeModifiers.PARALLEL_HATCH, GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.PERFECT_OVERCLOCK_SUBTICK))
+                .recipeModifier((machine, recipe, params, result) -> {
+                    GTRecipe recipe1 = recipe.copy();
+                    recipe1.duration = 1;
+                    recipe1 = GTRecipeModifiers.fastParallel(machine, recipe1, 2147483647, false).getFirst();
+                    return recipe1;
+                })
+                .tooltips(Component.literal(TextUtil.full_color("最大并行数：int")))
+                .tooltips(Component.literal(TextUtil.full_color("26个线圈就可以让你获得无与伦比的并行和跨配方并行")))
+                .tooltips(Component.literal(TextUtil.full_color("所有配方都为1t")))
+                .tooltips(Component.translatable("gtceu.multiblock.laser.tooltip"))
+                .tooltips(Component.translatable("gtceu.machine.perfect_oc"))
+                .tooltips(Component.translatable("gtceu.machine.available_recipe_map_3.tooltip", Component.translatable("gtceu.electric_blast_furnace"), Component.translatable("gtceu.alloy_blast_smelter"), Component.translatable("gtceu.alloy_smelter")))
+                .tooltips(Component.literal(TextUtil.full_color("由GTL_Extend添加")))
                 .pattern(definition -> MultiBlockStructure.GENERAL_ENERGY_FURNACE
                         .where('~', Predicates.controller(blocks(definition.getBlock())))
                         .where(' ', Predicates.any())
                         .where("c", blocks(GetRegistries.getBlock("gtceu:cleanroom_glass")))
-                        .where("a", Predicates.blocks(GetRegistries.getBlock("gtceu:high_temperature_smelting_casing"))
+                        .where("a", Predicates.blocks(GCyMBlocks.CASING_HIGH_TEMPERATURE_SMELTING.get())
                                 .setMinGlobalLimited(10)
                                 .or(Predicates.abilities(PartAbility.EXPORT_ITEMS).setPreviewCount(1))
                                 .or(Predicates.abilities(PartAbility.IMPORT_ITEMS).setPreviewCount(1))
@@ -70,7 +81,6 @@ public class MultiBlockMachine {
                         .where("e", blocks(GetRegistries.getBlock("gtceu:heat_vent")))
                         .where("f", Predicates.heatingCoils())
                         .build())
-                .additionalDisplay(GTL_Extend_MultiBlockMachineModifier.MAX_PARALLEL)
                 .workableCasingRenderer(GTCEu.id("block/casings/gcym/high_temperature_smelting_casing"),
                         GTCEu.id("block/multiblock/fusion_reactor"), false)
                 .register();
