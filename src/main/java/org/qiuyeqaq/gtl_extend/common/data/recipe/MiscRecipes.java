@@ -18,7 +18,7 @@ import org.gtlcore.gtlcore.utils.Registries;
 public class MiscRecipes {
 
     public static void init(Consumer<FinishedRecipe> provider) {
-        ASSEMBLER_RECIPES.recipeBuilder("gtl_extend_superfluid_general_energy_furnace")
+        ASSEMBLER_RECIPES.recipeBuilder("gtl_extend/superfluid_general_energy_furnace")
                 .inputItems(Registries.getItem("gtceu:electric_blast_furnace"), 8)
                 .inputItems(Registries.getItem("gtceu:alloy_blast_smelter"), 8)
                 .inputItems(Registries.getItem("gtceu:multi_smelter"), 8)

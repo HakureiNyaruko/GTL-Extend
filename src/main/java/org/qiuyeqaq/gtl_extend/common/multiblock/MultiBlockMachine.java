@@ -3,7 +3,6 @@ package org.qiuyeqaq.gtl_extend.common.multiblock;
 import static com.gregtechceu.gtceu.api.pattern.Predicates.blocks;
 import static com.gregtechceu.gtceu.common.data.GCyMBlocks.CASING_HIGH_TEMPERATURE_SMELTING;
 import static com.gregtechceu.gtceu.common.data.GTBlocks.HIGH_POWER_CASING;
-import static org.qiuyeqaq.gtl_extend.common.multiblock.GTL_Extend_MultiBlockMachineModifier.*;
 
 import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.data.RotationState;
@@ -11,8 +10,6 @@ import com.gregtechceu.gtceu.api.machine.MultiblockMachineDefinition;
 import com.gregtechceu.gtceu.api.machine.multiblock.PartAbility;
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableElectricMultiblockMachine;
 import com.gregtechceu.gtceu.api.pattern.Predicates;
-import com.gregtechceu.gtceu.api.recipe.GTRecipe;
-import com.gregtechceu.gtceu.api.recipe.OverclockingLogic;
 import com.gregtechceu.gtceu.common.data.*;
 
 import net.minecraft.network.chat.Component;
@@ -21,7 +18,6 @@ import org.qiuyeqaq.gtl_extend.api.registries.GTLEXRegistration;
 import org.qiuyeqaq.gtl_extend.client.renderer.machine.BlackHoleMatterDecompressor_Render;
 import org.qiuyeqaq.gtl_extend.common.data.GTL_Extend_CreativeModeTabs;
 import org.qiuyeqaq.gtl_extend.common.data.GetRegistries;
-import org.qiuyeqaq.gtl_extend.common.machines.machines.GTL_Extend_SmallMachines;
 import org.qiuyeqaq.gtl_extend.common.machines.recipes.GTL_Extend_RecipeTypes;
 import org.qiuyeqaq.gtl_extend.common.multiblock.electric.BlackHoleMatterDecompressor;
 import org.qiuyeqaq.gtl_extend.common.multiblock.structure.BlackHoleMatterDecompressor.BlackHoleMatterDecompressor_MultiBlockStructure;
@@ -41,9 +37,7 @@ public class MultiBlockMachine {
 
     public MultiBlockMachine() {}
 
-    public static void init() {
-        GTL_Extend_SmallMachines.init();
-    }
+    public static void init() {}
 
     static {
         SUPERFLUID_GENERAL_ENERGY_FURNACE = GTLEXRegistration.REGISTRATE.multiblock("superfluid_general_energy_furnace", WorkableElectricMultiblockMachine::new)
@@ -52,19 +46,24 @@ public class MultiBlockMachine {
                 .recipeType(GTRecipeTypes.BLAST_RECIPES)
                 .recipeType(GTRecipeTypes.ALLOY_SMELTER_RECIPES)
                 .recipeType(GCyMRecipeTypes.ALLOY_BLAST_RECIPES)
-                .recipeModifiers(GTRecipeModifiers.PARALLEL_HATCH, GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.PERFECT_OVERCLOCK_SUBTICK))
-                .recipeModifier((machine, recipe, params, result) -> {
-                    GTRecipe recipe1 = recipe.copy();
-                    recipe1.duration = 1;
-                    recipe1 = GTRecipeModifiers.fastParallel(machine, recipe1, 2147483647, false).getFirst();
-                    return recipe1;
-                })
-                .tooltips(Component.literal(TextUtil.full_color("最大并行数：int")))
-                .tooltips(Component.literal(TextUtil.full_color("26个线圈就可以让你获得无与伦比的并行和跨配方并行")))
-                .tooltips(Component.literal(TextUtil.full_color("所有配方都为1t")))
-                .tooltips(Component.translatable("gtceu.multiblock.laser.tooltip"))
-                .tooltips(Component.translatable("gtceu.machine.perfect_oc"))
-                .tooltips(Component.translatable("gtceu.machine.available_recipe_map_3.tooltip", Component.translatable("gtceu.electric_blast_furnace"), Component.translatable("gtceu.alloy_blast_smelter"), Component.translatable("gtceu.alloy_smelter")))
+                /*
+                 * .recipeModifiers(GTRecipeModifiers.PARALLEL_HATCH,
+                 * GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.PERFECT_OVERCLOCK_SUBTICK))
+                 * .recipeModifier((machine, recipe, params, result) -> {
+                 * GTRecipe recipe1 = recipe.copy();
+                 * recipe1.duration = 1;
+                 * recipe1 = GTRecipeModifiers.fastParallel(machine, recipe1, 2147483647, false).getFirst();
+                 * return recipe1;
+                 * })
+                 * .tooltips(Component.literal(TextUtil.full_color("最大并行数：int")))
+                 * .tooltips(Component.literal(TextUtil.full_color("26个线圈就可以让你获得无与伦比的并行和跨配方并行")))
+                 * .tooltips(Component.literal(TextUtil.full_color("所有配方都为1t")))
+                 * .tooltips(Component.translatable("gtceu.multiblock.laser.tooltip"))
+                 * .tooltips(Component.translatable("gtceu.machine.perfect_oc"))
+                 * .tooltips(Component.translatable("gtceu.machine.available_recipe_map_3.tooltip",
+                 * Component.translatable("gtceu.electric_blast_furnace"),
+                 * Component.translatable("gtceu.alloy_blast_smelter"), Component.translatable("gtceu.alloy_smelter")))
+                 */
                 .tooltips(Component.literal(TextUtil.full_color("由GTL_Extend添加")))
                 .pattern(definition -> MultiBlockStructure.GENERAL_ENERGY_FURNACE
                         .where('~', Predicates.controller(blocks(definition.getBlock())))

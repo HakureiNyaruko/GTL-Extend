@@ -6,6 +6,7 @@ import net.minecraftforge.fml.common.Mod;
 
 import org.qiuyeqaq.gtl_extend.client.ClientProxy;
 import org.qiuyeqaq.gtl_extend.common.CommonProxy;
+import org.qiuyeqaq.gtl_extend.common.materials.GTL_Extend_Materials;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +21,7 @@ public class Gtl_extend {
 
     public Gtl_extend() {
         Gtl_extend.init();
+        GTL_Extend_Materials.init();
         DistExecutor.unsafeRunForDist(() -> ClientProxy::new, () -> CommonProxy::new);
     }
 
