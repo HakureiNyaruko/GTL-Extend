@@ -172,11 +172,12 @@ public class BlackHoleMatterDecompressor_Render extends WorkableCasingMachineRen
                 Direction.UP,           // 面方向
                 ModelFactory.getBlockSprite(GLOW_TEXTURE), // 纹理
                 modelState,             // ModelState
-                0x80FFFFFF,             // ARGB颜色（半透明白色）
+                15,
                 OverlayTexture.NO_OVERLAY, // 覆盖纹理
                 false,                  // 不应用Diffuse Lighting
                 false                   // 不翻转面
         );
+
         // 将 BakedQuad 写入 VertexConsumer
         glowBuffer.putBulkData(
                 poseStack.last(),       // Pose
