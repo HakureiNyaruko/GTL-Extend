@@ -21,6 +21,8 @@ import org.qiuyeqaq.gtl_extend.common.materials.GTL_Extend_Materials;
 import org.qiuyeqaq.gtl_extend.common.multiblock.MultiBlockMachine;
 import org.qiuyeqaq.gtl_extend.config.GTLExtendConfigHolder;
 
+import lombok.val;
+
 public class CommonProxy {
 
     public CommonProxy() {
@@ -47,7 +49,10 @@ public class CommonProxy {
     }
 
     private void addMaterials(MaterialEvent event) {
-        GTL_Extend_Materials.init();
+        val ma = new GTL_Extend_Materials();
+        if (ma != null) {
+            ma.init();
+        }
     }
 
     private void modifyMaterials(PostMaterialEvent event) {}

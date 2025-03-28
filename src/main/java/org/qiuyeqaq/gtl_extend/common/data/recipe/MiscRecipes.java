@@ -1,7 +1,6 @@
 package org.qiuyeqaq.gtl_extend.common.data.recipe;
 
-import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.*;
-import static org.qiuyeqaq.gtl_extend.common.machines.recipes.GTL_Extend_RecipeTypes.*;
+import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.ASSEMBLER_RECIPES;
 
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
@@ -12,13 +11,12 @@ import org.qiuyeqaq.gtl_extend.common.multiblock.MultiBlockMachine;
 
 import java.util.function.Consumer;
 
-import org.gtlcore.gtlcore.common.data.*;
 import org.gtlcore.gtlcore.utils.Registries;
 
 public class MiscRecipes {
 
     public static void init(Consumer<FinishedRecipe> provider) {
-        ASSEMBLER_RECIPES.recipeBuilder("gtl_extend/superfluid_general_energy_furnace")
+        ASSEMBLER_RECIPES.recipeBuilder("superfluid_general_energy_furnace")
                 .inputItems(Registries.getItem("gtceu:electric_blast_furnace"), 8)
                 .inputItems(Registries.getItem("gtceu:alloy_blast_smelter"), 8)
                 .inputItems(Registries.getItem("gtceu:multi_smelter"), 8)

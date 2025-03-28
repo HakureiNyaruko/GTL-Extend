@@ -43,6 +43,9 @@ public class BlackHoleMatterDecompressor extends NoEnergyMultiblockMachine {
 
     public static final ManagedFieldHolder MANAGED_FIELD_HOLDER = new ManagedFieldHolder(
             BlackHoleMatterDecompressor.class, NoEnergyMultiblockMachine.MANAGED_FIELD_HOLDER);
+    // 常量定义
+    private static final int BASE_PARALLEL = 64;
+    private static final long BASE_EU_COST = 5277655810867200L;
 
     @Persisted
     private static long eternalbluedream = 0; // 永恒蓝梦流体存储量
@@ -50,44 +53,19 @@ public class BlackHoleMatterDecompressor extends NoEnergyMultiblockMachine {
     private static int oc = 0;     // 当前电路配置编号
     @Persisted
     private static int circuitConfig = 0;
+    protected ConditionalSubscriptionHandler StartupSubs;
     @Persisted
     @Nullable
-    private UUID userId;           // 绑定用户ID
-
-    // 常量定义
-    private static final int BASE_PARALLEL = 64;
-    private static final long BASE_EU_COST = 5277655810867200L;
-
-    protected ConditionalSubscriptionHandler StartupSubs;
+    private UUID userId;// 绑定用户ID
 
     public BlackHoleMatterDecompressor(IMachineBlockEntity holder, Object... args) {
         super(holder, args);
         this.StartupSubs = new ConditionalSubscriptionHandler(this, this::onStructureFormed, this::isFormed);
     }
 
-    @Override
-    public ManagedFieldHolder getFieldHolder() {
-        return MANAGED_FIELD_HOLDER;
-    }
-
-    // 电路配置更新逻辑
-    @Override
-    public void onStructureFormed() {
-        super.onStructureFormed();
-        // 按优先级 8 > 4 > 3 > 2 > 1 检测电路
-        int[] priorityOrder = { 8, 7, 6, 5, 4, 3, 2, 1 };
-        for (int config : priorityOrder) {
-            if (MachineIO.notConsumableCircuit(this, config)) {
-                oc = config;
-                return;
-            }
-        }
-        oc = 0; // 默认值
-    }
-
     // 判断是否启用无限蓝梦模式
     private static boolean isInfinityDreamEnabled() {
-        return GTLExtendConfigHolder.INSTANCE != null && GTLExtendConfigHolder.INSTANCE.enableInfinityDreamAndDreamHostCrafting && ETERNALBLUEDREAM != null;
+        return GTLExtendConfigHolder.INSTANCE != null && GTLExtendConfigHolder.INSTANCE.enableInfinityDreamAndDreamHostCrafting != false;
     }
 
     // 计算基础并行（电路编号的8次方，1号特殊处理）
@@ -122,21 +100,6 @@ public class BlackHoleMatterDecompressor extends NoEnergyMultiblockMachine {
         return (long) (BASE_EU_COST * Math.pow(4, ocTimes));
     }
 
-    // 流体输入处理（每tick执行）
-    @Override
-    public boolean onWorking() {
-        super.onWorking();
-
-        // 处理额外流体输入（永恒蓝梦）
-        if (isInfinityDreamEnabled()) {
-            FluidStack extraFluid = FluidStack.create(ETERNALBLUEDREAM.getFluid(), 1_000_000_000, null);
-            if (MachineIO.inputFluid(this, extraFluid)) {
-                eternalbluedream += 1_000_000_000;
-            }
-        }
-        return true;
-    }
-
     @Nullable
     public static GTRecipe recipeModifier(
                                           MetaMachine machine,
@@ -167,6 +130,41 @@ public class BlackHoleMatterDecompressor extends NoEnergyMultiblockMachine {
             }
         }
         return null;
+    }
+
+    @Override
+    public ManagedFieldHolder getFieldHolder() {
+        return MANAGED_FIELD_HOLDER;
+    }
+
+    // 电路配置更新逻辑
+    @Override
+    public void onStructureFormed() {
+        super.onStructureFormed();
+        // 按优先级 8 > 4 > 3 > 2 > 1 检测电路
+        int[] priorityOrder = { 8, 7, 6, 5, 4, 3, 2, 1 };
+        for (int config : priorityOrder) {
+            if (MachineIO.notConsumableCircuit(this, config)) {
+                oc = config;
+                return;
+            }
+        }
+        oc = 0; // 默认值
+    }
+
+    // 流体输入处理（每tick执行）
+    @Override
+    public boolean onWorking() {
+        super.onWorking();
+
+        // 处理额外流体输入（永恒蓝梦）
+        if (isInfinityDreamEnabled()) {
+            FluidStack extraFluid = FluidStack.create(ETERNALBLUEDREAM.getFluid(), 1_000_000_000, null);
+            if (MachineIO.inputFluid(this, extraFluid)) {
+                eternalbluedream += 1_000_000_000;
+            }
+        }
+        return true;
     }
 
     // 玩家交互绑定

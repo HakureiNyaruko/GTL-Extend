@@ -1,23 +1,23 @@
 package org.qiuyeqaq.gtl_extend.common.materials;
 
-import static com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlags.*;
-import static com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialIconSet.*;
-import static org.qiuyeqaq.gtl_extend.common.materials.GTL_Extend_Materials.*;
+import static com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlags.GENERATE_FRAME;
+import static com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialIconSet.MAGNETIC;
+import static org.qiuyeqaq.gtl_extend.common.materials.GTL_Extend_Materials.ETERNALBLUEDREAM;
 
 import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.data.chemical.material.Material;
-import com.gregtechceu.gtceu.api.fluids.FluidBuilder;
-import com.gregtechceu.gtceu.api.fluids.FluidState;
 
 public class GTL_Extend_MaterialsBuilder {
 
     public static void init() {
-        ETERNALBLUEDREAM = new Material.Builder(GTCEu.id("eternalbluedream"))
+        ETERNALBLUEDREAM = new Material.Builder(GTCEu.id("eternal_blue_dream_vein"))
                 .gem()
-                .liquid(new FluidBuilder().temperature(1).state(FluidState.LIQUID))
+                .ore()
+                .fluid()
                 .element(GTL_Extend_Elements.ETERNALBLUEDREAM)
                 .color(0x3F8EFF)
-                .iconSet(BRIGHT)
+                .secondaryColor(0x297CFF)
+                .iconSet(MAGNETIC)
                 .flags(GENERATE_FRAME)
                 .buildAndRegister();
     }
