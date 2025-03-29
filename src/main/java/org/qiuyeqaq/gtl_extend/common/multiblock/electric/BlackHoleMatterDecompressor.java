@@ -106,7 +106,7 @@ public class BlackHoleMatterDecompressor extends NoEnergyMultiblockMachine {
                                           @NotNull GTRecipe recipe,
                                           @NotNull OCParams params,
                                           @NotNull OCResult result) {
-        if (machine instanceof BlackHoleMatterDecompressor decompressor) {
+        if (machine instanceof BlackHoleMatterDecompressor decompressor && oc != 0) {
 
             // 根据额外流体计算并行数
             int parallel = decompressor.calculateParallel();

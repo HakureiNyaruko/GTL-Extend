@@ -1,10 +1,10 @@
 package org.qiuyeqaq.gtl_extend.mixin.gtl;
 
-import com.gregtechceu.gtceu.data.recipe.misc.alloyblast.AlloyBlastRecipeProducer;
+import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
 
 import org.spongepowered.asm.mixin.Mixin;
 
-@Mixin(AlloyBlastRecipeProducer.class)
+@Mixin(GTRecipeType.class)
 public abstract class GTLEXAddonMixin {
 
 }

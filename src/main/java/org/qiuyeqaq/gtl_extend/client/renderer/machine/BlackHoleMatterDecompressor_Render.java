@@ -82,6 +82,7 @@ public class BlackHoleMatterDecompressor_Render extends WorkableCasingMachineRen
     }
 
     // 根据机器朝向调整位置
+    @OnlyIn(Dist.CLIENT)
     private void adjustPositionByFacing(Direction facing, PoseStack poseStack) {
         double x = 0.5, y = 54.5, z = 0.5;
         switch (facing) {
@@ -94,6 +95,7 @@ public class BlackHoleMatterDecompressor_Render extends WorkableCasingMachineRen
     }
 
     // 事件视界渲染（黑洞核心）
+    @OnlyIn(Dist.CLIENT)
     private void renderEventHorizon(PoseStack poseStack, MultiBufferSource buffer) {
         poseStack.pushPose();
         poseStack.scale(0.8F, 0.8F, 0.8F); // 80% 原始大小
@@ -115,6 +117,7 @@ public class BlackHoleMatterDecompressor_Render extends WorkableCasingMachineRen
     }
 
     // 吸积盘渲染
+    @OnlyIn(Dist.CLIENT)
     private void renderAccretionDisk(float tick, PoseStack poseStack, MultiBufferSource buffer) {
         for (int layer = 0; layer < DISK_LAYERS; layer++) {
             poseStack.pushPose();
@@ -149,6 +152,7 @@ public class BlackHoleMatterDecompressor_Render extends WorkableCasingMachineRen
     }
 
     // 引力光晕效果
+    @OnlyIn(Dist.CLIENT)
     private void renderGravitationalGlow(float tick, PoseStack poseStack, MultiBufferSource buffer) {
         VertexConsumer glowBuffer = buffer.getBuffer(RenderType.entityTranslucentCull(GLOW_TEXTURE));
 
@@ -191,6 +195,7 @@ public class BlackHoleMatterDecompressor_Render extends WorkableCasingMachineRen
 
     // 注册所需模型
     @Override
+    @OnlyIn(Dist.CLIENT)
     public void onAdditionalModel(Consumer<ResourceLocation> registry) {
         super.onAdditionalModel(registry);
         registry.accept(EVENT_HORIZON_MODEL);
