@@ -1,7 +1,6 @@
 package org.qiuyeqaq.gtl_extend.common.data.recipe;
 
-import static org.gtlcore.gtlcore.common.data.GTLRecipeTypes.SUPRACHRONAL_ASSEMBLY_LINE_RECIPES;
-import static org.qiuyeqaq.gtl_extend.common.materials.GTL_Extend_Materials.ETERNALBLUEDREAM;
+import org.gtlcore.gtlcore.utils.Registries;
 
 import com.gregtechceu.gtceu.api.GTValues;
 
@@ -9,13 +8,13 @@ import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.world.item.Item;
 
 import com.tterrag.registrate.util.entry.ItemEntry;
-
 import org.qiuyeqaq.gtl_extend.common.items.Gtl_extend_Item;
 import org.qiuyeqaq.gtl_extend.config.GTLExtendConfigHolder;
 
 import java.util.function.Consumer;
 
-import org.gtlcore.gtlcore.utils.Registries;
+import static org.gtlcore.gtlcore.common.data.GTLRecipeTypes.SUPRACHRONAL_ASSEMBLY_LINE_RECIPES;
+import static org.qiuyeqaq.gtl_extend.common.materials.GTL_Extend_Materials.ETERNALBLUEDREAM;
 
 public class CustomRecipe {
 

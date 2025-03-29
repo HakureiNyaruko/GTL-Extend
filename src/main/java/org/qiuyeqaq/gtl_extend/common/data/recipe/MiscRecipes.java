@@ -1,6 +1,6 @@
 package org.qiuyeqaq.gtl_extend.common.data.recipe;
 
-import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.ASSEMBLER_RECIPES;
+import org.gtlcore.gtlcore.utils.Registries;
 
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
@@ -11,7 +11,7 @@ import org.qiuyeqaq.gtl_extend.common.multiblock.MultiBlockMachine;
 
 import java.util.function.Consumer;
 
-import org.gtlcore.gtlcore.utils.Registries;
+import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.ASSEMBLER_RECIPES;
 
 public class MiscRecipes {
 

@@ -1,8 +1,7 @@
 package org.qiuyeqaq.gtl_extend.common.multiblock;
 
-import static com.gregtechceu.gtceu.api.pattern.Predicates.blocks;
-import static com.gregtechceu.gtceu.common.data.GCyMBlocks.CASING_HIGH_TEMPERATURE_SMELTING;
-import static com.gregtechceu.gtceu.common.data.GTBlocks.HIGH_POWER_CASING;
+import org.gtlcore.gtlcore.common.data.GTLRecipeTypes;
+import org.gtlcore.gtlcore.utils.TextUtil;
 
 import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.data.RotationState;
@@ -20,13 +19,15 @@ import org.qiuyeqaq.gtl_extend.api.registries.GTLEXRegistration;
 import org.qiuyeqaq.gtl_extend.client.renderer.machine.BlackHoleMatterDecompressor_Render;
 import org.qiuyeqaq.gtl_extend.common.data.GTL_Extend_CreativeModeTabs;
 import org.qiuyeqaq.gtl_extend.common.data.GetRegistries;
+import org.qiuyeqaq.gtl_extend.common.machines.machines.GTL_Extend_SmallMachines;
 import org.qiuyeqaq.gtl_extend.common.machines.recipes.GTL_Extend_RecipeTypes;
 import org.qiuyeqaq.gtl_extend.common.multiblock.electric.BlackHoleMatterDecompressor;
 import org.qiuyeqaq.gtl_extend.common.multiblock.structure.BlackHoleMatterDecompressor.BlackHoleMatterDecompressor_MultiBlockStructure;
 import org.qiuyeqaq.gtl_extend.common.multiblock.structure.MultiBlockStructure;
 
-import org.gtlcore.gtlcore.common.data.GTLRecipeTypes;
-import org.gtlcore.gtlcore.utils.TextUtil;
+import static com.gregtechceu.gtceu.api.pattern.Predicates.blocks;
+import static com.gregtechceu.gtceu.common.data.GCyMBlocks.CASING_HIGH_TEMPERATURE_SMELTING;
+import static com.gregtechceu.gtceu.common.data.GTBlocks.HIGH_POWER_CASING;
 
 public class MultiBlockMachine {
 
@@ -118,7 +119,7 @@ public class MultiBlockMachine {
                 .register();
     }
 
-    public MultiBlockMachine() {}
-
-    public static void init() {}
+    public static void init() {
+        GTL_Extend_SmallMachines.init();
+    }
 }

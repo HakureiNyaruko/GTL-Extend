@@ -1,11 +1,10 @@
 package org.qiuyeqaq.gtl_extend.config;
 
-import org.qiuyeqaq.gtl_extend.Gtl_extend;
-
 import dev.toma.configuration.Configuration;
 import dev.toma.configuration.config.Config;
 import dev.toma.configuration.config.Configurable;
 import dev.toma.configuration.config.format.ConfigFormats;
+import org.qiuyeqaq.gtl_extend.Gtl_extend;
 
 @Config(id = Gtl_extend.MODID)
 public class GTLExtendConfigHolder {

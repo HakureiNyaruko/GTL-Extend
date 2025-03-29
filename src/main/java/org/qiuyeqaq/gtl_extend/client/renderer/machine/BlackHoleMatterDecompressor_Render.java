@@ -1,11 +1,16 @@
 package org.qiuyeqaq.gtl_extend.client.renderer.machine;
 
+import org.gtlcore.gtlcore.client.ClientUtil;
+
 import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.feature.multiblock.IMultiController;
 import com.gregtechceu.gtceu.api.machine.feature.multiblock.IMultiPart;
 import com.gregtechceu.gtceu.client.renderer.machine.IControllerRenderer;
 import com.gregtechceu.gtceu.client.renderer.machine.WorkableCasingMachineRenderer;
+
+import com.lowdragmc.lowdraglib.client.bakedpipeline.FaceQuad;
+import com.lowdragmc.lowdraglib.client.model.ModelFactory;
 
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -23,22 +28,16 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.model.SimpleModelState;
 import net.minecraftforge.client.model.data.ModelData;
 
-import com.lowdragmc.lowdraglib.client.bakedpipeline.FaceQuad;
-import com.lowdragmc.lowdraglib.client.model.ModelFactory;
-
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Transformation;
 import org.jetbrains.annotations.Nullable;
-
+import org.joml.Quaternionf;
 import org.qiuyeqaq.gtl_extend.Gtl_extend;
 import org.qiuyeqaq.gtl_extend.common.multiblock.electric.BlackHoleMatterDecompressor;
 
 import java.util.List;
 import java.util.function.Consumer;
-
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Transformation;
-import org.gtlcore.gtlcore.client.ClientUtil;
-import org.joml.Quaternionf;
 
 public class BlackHoleMatterDecompressor_Render extends WorkableCasingMachineRenderer implements IControllerRenderer {
 
@@ -229,6 +228,6 @@ public class BlackHoleMatterDecompressor_Render extends WorkableCasingMachineRen
     @Override
     @OnlyIn(Dist.CLIENT)
     public int getViewDistance() {
-        return 1024; // 扩大渲染距离
+        return 512; // 扩大渲染距离
     }
 }

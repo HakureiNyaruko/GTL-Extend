@@ -1,5 +1,8 @@
 package org.qiuyeqaq.gtl_extend;
 
+import org.gtlcore.gtlcore.GTLCore;
+import org.gtlcore.gtlcore.utils.StorageManager;
+
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
@@ -8,13 +11,10 @@ import net.minecraftforge.fml.common.Mod;
 
 import org.qiuyeqaq.gtl_extend.client.ClientProxy;
 import org.qiuyeqaq.gtl_extend.common.CommonProxy;
-
-import java.util.Objects;
-
-import org.gtlcore.gtlcore.GTLCore;
-import org.gtlcore.gtlcore.utils.StorageManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Objects;
 
 @Mod(Gtl_extend.MODID)
 public class Gtl_extend {

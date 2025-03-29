@@ -1,24 +1,17 @@
 package org.qiuyeqaq.gtl_extend.common.items;
 
-import static com.gregtechceu.gtceu.common.data.GTItems.*;
-import static org.qiuyeqaq.gtl_extend.api.registries.GTLEXRegistration.*;
-
 import net.minecraft.world.item.Item;
 
 import com.tterrag.registrate.util.entry.ItemEntry;
-
 import org.qiuyeqaq.gtl_extend.common.data.GTL_Extend_CreativeModeTabs;
 
-public class Gtl_extend_Item {
+import static org.qiuyeqaq.gtl_extend.api.registries.GTLEXRegistration.REGISTRATE;
 
-    static {
-        REGISTRATE.creativeModeTab(() -> GTL_Extend_CreativeModeTabs.GTL_EX_GT_ITEM);
-    }
+public class Gtl_extend_Item {
 
     public static final ItemEntry<Item> FOREVER = REGISTRATE.item("forever", Item::new)
             .lang("Forever")
             .register();
-
     public static final ItemEntry<Item> ETERNALBLUE_DREAM_LV_PROCESSOR_MAINFRAME = registerMainframe("lv");
     public static final ItemEntry<Item> ETERNALBLUE_DREAM_MV_PROCESSOR_MAINFRAME = registerMainframe("mv");
     public static final ItemEntry<Item> ETERNALBLUE_DREAM_HV_PROCESSOR_MAINFRAME = registerMainframe("hv");
@@ -33,11 +26,15 @@ public class Gtl_extend_Item {
     public static final ItemEntry<Item> ETERNALBLUE_DREAM_UXV_PROCESSOR_MAINFRAME = registerMainframe("uxv");
     public static final ItemEntry<Item> ETERNALBLUE_DREAM_OPV_PROCESSOR_MAINFRAME = registerMainframe("opv");
     public static final ItemEntry<Item> ETERNALBLUE_DREAM_MAX_PROCESSOR_MAINFRAME = registerMainframe("max");
+
+    static {
+        REGISTRATE.creativeModeTab(() -> GTL_Extend_CreativeModeTabs.GTL_EX_GT_ITEM);
+    }
     // 继续添加剩余层级（ev, iv, luv, zpm, uv, uhv, uev, uiv, uxv, opv, max）
 
     // 辅助方法：批量注册
     private static ItemEntry<Item> registerMainframe(String tier) {
-        return REGISTRATE.item("eternalbluedream_" + tier + "_processor_mainframe", Item::new)
+        return REGISTRATE.item("eternalbluedream_" + tier + "_processor_mainferame", Item::new)
                 .lang("Eternal Blue Dream " + tier.toUpperCase() + " Processor Mainframe")
                 .register();
     }

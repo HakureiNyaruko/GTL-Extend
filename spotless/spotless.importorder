@@ -1,13 +1,11 @@
 #Organize Import Order
 #Sat May 27 02:13:47 CDT 2023
 # 分组顺序（严格匹配你的需求）
-0=com.gregtechceu.gtceu
-1=net.minecraft
-2=com.tterrag.registrate
-3=com.lowdragmc.lowdraglib
-4=it.unimi.dsi.fastutil
-5=org.jetbrains.annotations
-6=org.qiuyeqaq.gtl_extend
-7=java
-8=javax
-9=#
+0=org.gtlcore.gtlcore
+1=com.gregtechceu
+1=com.lowdragmc
+1=net
+2=
+3=java
+4=javax
+5=\#
