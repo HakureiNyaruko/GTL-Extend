@@ -12,7 +12,6 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
-import lombok.val;
 import org.qiuyeqaq.gtl_extend.Gtl_extend;
 import org.qiuyeqaq.gtl_extend.common.data.GTL_Extend_CreativeModeTabs;
 import org.qiuyeqaq.gtl_extend.common.machines.recipes.GTL_Extend_RecipeTypes;
@@ -48,10 +47,7 @@ public class CommonProxy {
     }
 
     private void addMaterials(MaterialEvent event) {
-        val ma = new GTL_Extend_Materials();
-        if (ma != null) {
-            ma.init();
-        }
+        GTL_Extend_Materials.init();
     }
 
     private void modifyMaterials(PostMaterialEvent event) {}

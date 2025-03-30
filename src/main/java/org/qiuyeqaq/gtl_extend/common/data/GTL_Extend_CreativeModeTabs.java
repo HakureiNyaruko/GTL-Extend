@@ -9,17 +9,13 @@ import org.qiuyeqaq.gtl_extend.common.blocks.Gtl_extend_Blocks;
 import org.qiuyeqaq.gtl_extend.common.items.Gtl_extend_Item;
 import org.qiuyeqaq.gtl_extend.common.multiblock.MultiBlockMachine;
 
-import static com.gregtechceu.gtceu.common.data.GTCreativeModeTabs.*;
+import static com.gregtechceu.gtceu.common.data.GTCreativeModeTabs.RegistrateDisplayItemsGenerator;
 
 public class GTL_Extend_CreativeModeTabs {
 
     public static RegistryEntry<CreativeModeTab> MACHINES_ITEM;
     public static RegistryEntry<CreativeModeTab> BLOCKS_ITEM;
     public static RegistryEntry<CreativeModeTab> GTL_EX_GT_ITEM;
-
-    public GTL_Extend_CreativeModeTabs() {}
-
-    public static void init() {}
 
     static {
         MACHINES_ITEM = GTLEXRegistration.REGISTRATE.defaultCreativeTab("machines_item", (builder) -> {
@@ -43,4 +39,8 @@ public class GTL_Extend_CreativeModeTabs {
                     .build();
         }).register();
     }
+
+    public GTL_Extend_CreativeModeTabs() {}
+
+    public static void init() {}
 }

@@ -105,7 +105,7 @@ public class BlackHoleMatterDecompressor extends NoEnergyMultiblockMachine {
                                           @NotNull GTRecipe recipe,
                                           @NotNull OCParams params,
                                           @NotNull OCResult result) {
-        if (machine instanceof BlackHoleMatterDecompressor decompressor && oc != 0) {
+        if (machine instanceof BlackHoleMatterDecompressor decompressor && BlackHoleMatterDecompressor.oc != 0) {
 
             // 根据额外流体计算并行数
             int parallel = decompressor.calculateParallel();
@@ -118,7 +118,7 @@ public class BlackHoleMatterDecompressor extends NoEnergyMultiblockMachine {
                             machine)) {
 
                 GTRecipe modifiedRecipe = recipe.copy();
-                modifiedRecipe.duration = (int) (4800 / Math.pow(2, getRecipeEUt()));
+                modifiedRecipe.duration = (int) (4800 / Math.pow(2, BlackHoleMatterDecompressor.oc));
 
                 // 应用精确并行处理并返回结果
                 return GTRecipeModifiers.accurateParallel(
@@ -158,12 +158,12 @@ public class BlackHoleMatterDecompressor extends NoEnergyMultiblockMachine {
 
         // 处理额外流体输入（永恒蓝梦）
         if (isInfinityDreamEnabled()) {
-            FluidStack extraFluid = FluidStack.create(ETERNALBLUEDREAM.getFluid(), 1_000_000_000, null);
+            FluidStack extraFluid = FluidStack.create(ETERNALBLUEDREAM.getFluid(), 100000000);
             if (MachineIO.inputFluid(this, extraFluid)) {
-                eternalbluedream += 1_000_000_000;
+                eternalbluedream += 100000000;
             }
         }
-        return true;
+        return false;
     }
 
     // 玩家交互绑定

@@ -1,6 +1,5 @@
 #Organize Import Order
 #Sat May 27 02:13:47 CDT 2023
-# 分组顺序（严格匹配你的需求）
 0=org.gtlcore.gtlcore
 1=com.gregtechceu
 1=com.lowdragmc

@@ -1,6 +1,6 @@
 {
   "config.screen.gtl_extend": "GTL EX设置",
-  "config.gtl_extend.option.enableInfinityDreamAndDreamHostCrafting": "开启永恒蓝梦和蓝梦主机合成表的注册\\n注意这可能会影响游戏平衡（修改后请退出重进）",
+  "config.gtl_extend.option.enableInfinityDreamAndDreamHostCrafting": "开启永恒蓝梦和蓝梦主机合成表的注册注意这可能会影响游戏平衡（修改后请退出重进）",
   "config.gtl_extend.option.enableBlackHoleMatterDecompressor": "开启黑洞物质解压器实体渲染,当延迟过大时关闭此项",
   "config.gtl_extend.option.enableHyperDimensionalPower": "开启超维度发电机",
   "itemGroup.gtl_extend.machines_item": "GTL_EX 机器",
