@@ -1,15 +1,16 @@
 package org.qiuyeqaq.gtl_extend.common.data;
 
-import net.minecraft.world.item.CreativeModeTab;
+import static com.gregtechceu.gtceu.common.data.GTCreativeModeTabs.RegistrateDisplayItemsGenerator;
 
-import com.tterrag.registrate.util.entry.RegistryEntry;
 import org.qiuyeqaq.gtl_extend.Gtl_extend;
 import org.qiuyeqaq.gtl_extend.api.registries.GTLEXRegistration;
 import org.qiuyeqaq.gtl_extend.common.blocks.Gtl_extend_Blocks;
 import org.qiuyeqaq.gtl_extend.common.items.Gtl_extend_Item;
 import org.qiuyeqaq.gtl_extend.common.multiblock.MultiBlockMachine;
 
-import static com.gregtechceu.gtceu.common.data.GTCreativeModeTabs.RegistrateDisplayItemsGenerator;
+import com.tterrag.registrate.util.entry.RegistryEntry;
+
+import net.minecraft.world.item.CreativeModeTab;
 
 public class GTL_Extend_CreativeModeTabs {
 
