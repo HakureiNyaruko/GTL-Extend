@@ -1,10 +1,6 @@
 package org.qiuyeqaq.gtl_extend;
 
-import com.gregtechceu.gtceu.api.addon.IGTAddon;
-import com.gregtechceu.gtceu.api.addon.events.MaterialCasingCollectionEvent;
-import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate;
-
-import net.minecraft.data.recipes.FinishedRecipe;
+import java.util.function.Consumer;
 
 import org.qiuyeqaq.gtl_extend.api.registries.GTLEXRegistration;
 import org.qiuyeqaq.gtl_extend.common.blocks.Gtl_extend_Blocks;
@@ -13,7 +9,11 @@ import org.qiuyeqaq.gtl_extend.common.data.recipe.CustomRecipe;
 import org.qiuyeqaq.gtl_extend.common.items.Gtl_extend_Item;
 import org.qiuyeqaq.gtl_extend.common.materials.GTL_Extend_Elements;
 
-import java.util.function.Consumer;
+import com.gregtechceu.gtceu.api.addon.IGTAddon;
+import com.gregtechceu.gtceu.api.addon.events.MaterialCasingCollectionEvent;
+import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate;
+
+import net.minecraft.data.recipes.FinishedRecipe;
 
 @com.gregtechceu.gtceu.api.addon.GTAddon
 public class Gtl_Extend_Addon implements IGTAddon {
