@@ -1,9 +1,9 @@
 {
-	"parent": "block/cube_all",
 	"ambientocclusion": true,
 	"texture_size": [64, 64],
 	"textures": {
-		"1": "gtl_extend:block/dimension_core"
+		"1": "gtl_extend:block/dimension_core",
+		"particle": "gtl_extend:block/dimension_core"
 	},
 	"elements": [
 		{

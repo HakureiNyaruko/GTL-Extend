@@ -13,12 +13,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.function.Consumer;
 
 @Mixin(GTLGTAddon.class)
-public class GTL_EX_AddionMixin {
+public abstract class GTL_EX_AddionMixin {
 
     @Inject(
             method = "addRecipes",
             at = @At("HEAD"),
-            remap = false)
+            remap = false,
+            require = 1)
     private void injectCustomRecipes(Consumer<FinishedRecipe> provider, CallbackInfo ci) {
         // 仅注册本mod的配方
         MiscRecipes.init(provider);

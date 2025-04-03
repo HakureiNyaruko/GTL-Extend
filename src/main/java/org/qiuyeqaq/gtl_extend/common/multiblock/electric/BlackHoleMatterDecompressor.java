@@ -78,9 +78,9 @@ public class BlackHoleMatterDecompressor extends NoEnergyMultiblockMachine {
         int base = getBaseParallel();
         if (!isInfinityDreamEnabled()) return base;
 
-        // 每1B流体翻倍一次，但不超过int最大值
+        // 每1000B流体翻倍一次，但不超过int最大值
         long multiplier = eternalbluedream / 1_000_000_000L;
-        return (int) Math.min(base * (1L << multiplier), Integer.MAX_VALUE);
+        return (int) Math.min(base * (1000L << multiplier), Integer.MAX_VALUE);
     }
 
     // 获取超频次数（电路配置映射）
@@ -96,7 +96,7 @@ public class BlackHoleMatterDecompressor extends NoEnergyMultiblockMachine {
     // 计算启动能耗
     private static long getRecipeEUt() {
         int ocTimes = calculateOverclockTimes();
-        return (long) (BASE_EU_COST * Math.pow(4, ocTimes));
+        return (long) (BASE_EU_COST * Math.pow(16, ocTimes));
     }
 
     @Nullable

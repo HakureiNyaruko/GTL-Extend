@@ -1,15 +1,23 @@
 package org.qiuyeqaq.gtl_extend.common.items;
 
+import com.gregtechceu.gtceu.api.item.ComponentItem;
+import com.gregtechceu.gtceu.api.item.component.IItemComponent;
+import com.gregtechceu.gtceu.common.data.GTCompassSections;
+import com.gregtechceu.gtceu.common.item.DataItemBehavior;
+
 import net.minecraft.world.item.Item;
 
 import com.tterrag.registrate.util.entry.ItemEntry;
 import org.qiuyeqaq.gtl_extend.common.data.GTL_Extend_CreativeModeTabs;
 
+import static com.gregtechceu.gtceu.common.data.GTItems.attach;
+import static com.gregtechceu.gtceu.common.data.GTItems.compassNode;
 import static org.qiuyeqaq.gtl_extend.api.registries.GTLEXRegistration.REGISTRATE;
 
 public class Gtl_extend_Item {
 
     public static final ItemEntry<Item> FOREVER;
+    public static final ItemEntry<ComponentItem> ADVANCED_DATA_MODULE;
     public static final ItemEntry<Item> ETERNALBLUE_DREAM_LV_PROCESSOR_MAINFRAME;
     public static final ItemEntry<Item> ETERNALBLUE_DREAM_MV_PROCESSOR_MAINFRAME;
     public static final ItemEntry<Item> ETERNALBLUE_DREAM_HV_PROCESSOR_MAINFRAME;
@@ -33,6 +41,10 @@ public class Gtl_extend_Item {
     static {
         FOREVER = REGISTRATE.item("forever", Item::new)
                 .lang("Forever")
+                .register();
+        ADVANCED_DATA_MODULE = REGISTRATE.item("advanced_data_module", ComponentItem::create)
+                .onRegister(attach((IItemComponent) (new DataItemBehavior(true))))
+                .onRegister(compassNode(GTCompassSections.COMPONENTS))
                 .register();
 
         ETERNALBLUE_DREAM_LV_PROCESSOR_MAINFRAME = registerMainframe("lv");
