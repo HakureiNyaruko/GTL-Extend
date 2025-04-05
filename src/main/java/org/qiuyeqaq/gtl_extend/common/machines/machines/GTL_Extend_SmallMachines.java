@@ -39,7 +39,7 @@ public class GTL_Extend_SmallMachines {
                                 FormattingUtil.formatNumbers(GTValues.V[tier] * 2048L)))
                         .tooltipBuilder(GTL_EX_ADD)
                         .register(),
-                GTValues.MV, GTValues.HV, GTValues.EV, GTValues.LuV, GTValues.ZPM);
+                GTValues.MV, GTValues.HV, GTValues.EV, GTValues.IV, GTValues.LuV, GTValues.ZPM);
     }
 
     public static void init() {}

@@ -7,7 +7,7 @@ import com.gregtechceu.gtceu.api.fluids.FluidBuilder;
 import org.qiuyeqaq.gtl_extend.config.GTLExtendConfigHolder;
 
 import static com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlags.GENERATE_FRAME;
-import static com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialIconSet.MAGNETIC;
+import static com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialIconSet.BRIGHT;
 import static org.qiuyeqaq.gtl_extend.common.materials.GTL_Extend_Materials.ETERNALBLUEDREAM;
 import static org.qiuyeqaq.gtl_extend.common.materials.GTL_Extend_Materials.FLUIXCRYSTAL;
 
@@ -29,7 +29,7 @@ public class GTL_Extend_MaterialsBuilder {
                 .element(GTL_Extend_Elements.ETERNALBLUEDREAM)
                 .color(0x3F8EFF)
                 .secondaryColor(0x297CFF)
-                .iconSet(MAGNETIC)
+                .iconSet(BRIGHT)
                 .flags(GENERATE_FRAME)
                 .buildAndRegister();
     }

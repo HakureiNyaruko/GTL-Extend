@@ -5,6 +5,7 @@ import com.gregtechceu.gtceu.data.recipe.CustomTags;
 import com.gregtechceu.gtceu.data.recipe.VanillaRecipeHelper;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import org.gtlcore.gtlcore.utils.Registries;
@@ -16,77 +17,45 @@ import org.qiuyeqaq.gtl_extend.config.GTLExtendConfigHolder;
 
 import java.util.function.Consumer;
 
+import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.EXTRACTOR_RECIPES;
 import static org.gtlcore.gtlcore.common.data.GTLRecipeTypes.SUPRACHRONAL_ASSEMBLY_LINE_RECIPES;
 import static org.qiuyeqaq.gtl_extend.common.blocks.Gtl_extend_Blocks.VOID_WORLD_BLOCK;
 import static org.qiuyeqaq.gtl_extend.common.machines.recipes.GTL_Extend_RecipeTypes.GENERAL_PURPOSE_AE_PRODUCTION_RECIPES;
+import static org.qiuyeqaq.gtl_extend.common.machines.recipes.GTL_Extend_RecipeTypes.VOID_PUMP_RECIPES;
 import static org.qiuyeqaq.gtl_extend.common.materials.GTL_Extend_Materials.ETERNALBLUEDREAM;
 
 public class CustomRecipe {
 
     public static void init(Consumer<FinishedRecipe> provider) {
-        VanillaRecipeHelper.addShapedRecipe(provider, true, "lv_primitive_magic_energy",
-                new ItemStack(GetRegistries.getItem("gtceu:lv_primitive_magic_energy")),
-                "ADA",
-                "ABA",
-                "CDC",
-                'A', GetRegistries.getItem("gtceu:lv_machine_casing"),
-                'B', GetRegistries.getItem("minecraft:end_crystal"),
-                'C', GetRegistries.getItem("gtceu:tin_single_cable"),
-                'D', CustomTags.LV_CIRCUITS);
-        VanillaRecipeHelper.addShapedRecipe(provider, true, "mv_primitive_magic_energy",
-                new ItemStack(GetRegistries.getItem("gtl_extend:mv_primitive_magic_energy")),
-                "ADA",
-                "ABA",
-                "CDC",
-                'A', GetRegistries.getItem("gtceu:mv_machine_casing"),
-                'B', GetRegistries.getItem("minecraft:end_crystal"),
-                'C', GetRegistries.getItem("gtceu:copper_single_cable"),
-                'D', CustomTags.MV_CIRCUITS);
-        VanillaRecipeHelper.addShapedRecipe(provider, true, "hv_primitive_magic_energy",
-                new ItemStack(GetRegistries.getItem("gtl_extend:hv_primitive_magic_energy")),
-                "ADA",
-                "ABA",
-                "CDC",
-                'A', GetRegistries.getItem("gtceu:hv_machine_casing"),
-                'B', GetRegistries.getItem("minecraft:end_crystal"),
-                'C', GetRegistries.getItem("gtceu:gold_single_cable"),
-                'D', CustomTags.HV_CIRCUITS);
-        VanillaRecipeHelper.addShapedRecipe(provider, true, "ev_primitive_magic_energy",
-                new ItemStack(GetRegistries.getItem("gtl_extend:ev_primitive_magic_energy")),
-                "ADA",
-                "ABA",
-                "CDC",
-                'A', GetRegistries.getItem("gtceu:ev_machine_casing"),
-                'B', GetRegistries.getItem("minecraft:end_crystal"),
-                'C', GetRegistries.getItem("gtceu:aluminium_single_cable"),
-                'D', CustomTags.EV_CIRCUITS);
-        VanillaRecipeHelper.addShapedRecipe(provider, true, "iv_primitive_magic_energy",
-                new ItemStack(GetRegistries.getItem("gtl_extend:iv_primitive_magic_energy")),
-                "ADA",
-                "ABA",
-                "CDC",
-                'A', GetRegistries.getItem("gtceu:iv_machine_casing"),
-                'B', GetRegistries.getItem("minecraft:end_crystal"),
-                'C', GetRegistries.getItem("gtceu:graphene_single_cable"),
-                'D', CustomTags.IV_CIRCUITS);
-        VanillaRecipeHelper.addShapedRecipe(provider, true, "luv_primitive_magic_energy",
-                new ItemStack(GetRegistries.getItem("gtl_extend:luv_primitive_magic_energy")),
-                "ADA",
-                "ABA",
-                "CDC",
-                'A', GetRegistries.getItem("gtceu:luv_machine_casing"),
-                'B', GetRegistries.getItem("minecraft:end_crystal"),
-                'C', GetRegistries.getItem("gtceu:niobium_nitride_single_cable"),
-                'D', CustomTags.LuV_CIRCUITS);
-        VanillaRecipeHelper.addShapedRecipe(provider, true, "zpm_primitive_magic_energy",
-                new ItemStack(GetRegistries.getItem("gtl_extend:zpm_primitive_magic_energy")),
-                "ADA",
-                "ABA",
-                "CDC",
-                'A', GetRegistries.getItem("gtceu:zpm_machine_casing"),
-                'B', GetRegistries.getItem("minecraft:end_crystal"),
-                'C', GetRegistries.getItem("gtceu:naquadah_single_cable"),
-                'D', CustomTags.ZPM_CIRCUITS);
+        Object[][] magicEnergyConfigs = new Object[][] {
+                // 参数格式: [电压等级, 输出物品所在Mod的命名空间, 电缆材料名]
+                {"lv",   "gtceu",    "tin",          CustomTags.LV_CIRCUITS},
+                {"mv",   "gtl_extend", "copper",      CustomTags.MV_CIRCUITS},
+                {"hv",   "gtl_extend", "gold",        CustomTags.HV_CIRCUITS},
+                {"ev",   "gtl_extend", "aluminium",   CustomTags.EV_CIRCUITS},
+                {"iv",   "gtl_extend", "graphene",    CustomTags.IV_CIRCUITS},
+                {"luv",  "gtl_extend", "niobium_nitride", CustomTags.LuV_CIRCUITS},
+                {"zpm",  "gtl_extend", "naquadah",    CustomTags.ZPM_CIRCUITS}
+        };
+
+        for (Object[] config : magicEnergyConfigs) {
+            String tier = (String) config[0];
+            String namespace = (String) config[1];
+            String cableMaterial = (String) config[2];
+            TagKey<Item> circuitTag = (TagKey<Item>) config[3];
+
+            VanillaRecipeHelper.addShapedRecipe(
+                    provider,
+                    true,
+                    tier + "_primitive_magic_energy",
+                    new ItemStack(GetRegistries.getItem(namespace + ":" + tier + "_primitive_magic_energy")),
+                    "ADA", "ABA", "CDC",
+                    'A', GetRegistries.getItem("gtceu:" + tier + "_machine_casing"),
+                    'B', GetRegistries.getItem("minecraft:end_crystal"),
+                    'C', GetRegistries.getItem("gtceu:" + cableMaterial + "_single_cable"),
+                    'D', circuitTag
+            );
+        }
         VanillaRecipeHelper.addShapedRecipe(provider, true, "void_world_block",
                 VOID_WORLD_BLOCK.asStack(),
                 "AAA",
@@ -113,57 +82,54 @@ public class CustomRecipe {
                     'A', GetRegistries.getItem("ae2:sky_stone_block"),
                     'B', CustomTags.EV_CIRCUITS);
 
-            GENERAL_PURPOSE_AE_PRODUCTION_RECIPES.recipeBuilder("gtl_ex_ae2_fluix_cable_1")
-                    .circuitMeta(1)
-                    .chancedInput(new ItemStack(Registries.getItem("ae2:quartz_fiber")), 9000, 0)
-                    .inputFluids(GTL_Extend_Materials.FLUIXCRYSTAL.getFluid(144))
-                    .outputItems(Registries.getItem("ae2:fluix_glass_cable"), 16)
-                    .duration(512)
-                    .EUt(GTValues.V[GTValues.IV])
+            EXTRACTOR_RECIPES.recipeBuilder("rtt_fluid_fluix")
+                    .inputItems(Registries.getItem("ae2:fluix_dust"))
+                    .outputFluids(GTL_Extend_Materials.FLUIXCRYSTAL.getFluid(144))
+                    .duration(200)
+                    .EUt(GTValues.V[GTValues.LV])
                     .save(provider);
-            GENERAL_PURPOSE_AE_PRODUCTION_RECIPES.recipeBuilder("gtl_ex_ae2_fluix_cable_2")
-                    .circuitMeta(2)
-                    .chancedInput(new ItemStack(Registries.getItem("ae2:quartz_fiber")), 9000, 0)
-                    .inputFluids(GTL_Extend_Materials.FLUIXCRYSTAL.getFluid(144))
-                    .outputItems(Registries.getItem("ae2:fluix_covered_cable"), 16)
-                    .duration(512)
-                    .EUt(GTValues.V[GTValues.IV])
-                    .save(provider);
-            GENERAL_PURPOSE_AE_PRODUCTION_RECIPES.recipeBuilder("gtl_ex_ae2_fluix_cable_3")
-                    .circuitMeta(3)
-                    .chancedInput(new ItemStack(Registries.getItem("ae2:quartz_fiber")), 9000, 0)
-                    .inputFluids(GTL_Extend_Materials.FLUIXCRYSTAL.getFluid(144))
-                    .outputItems(Registries.getItem("ae2:fluix_smart_cable"), 16)
-                    .duration(512)
-                    .EUt(GTValues.V[GTValues.IV])
-                    .save(provider);
-            GENERAL_PURPOSE_AE_PRODUCTION_RECIPES.recipeBuilder("gtl_ex_ae2_fluix_cable_4")
-                    .circuitMeta(4)
-                    .chancedInput(new ItemStack(Registries.getItem("ae2:quartz_fiber")), 9000, 0)
-                    .inputFluids(GTL_Extend_Materials.FLUIXCRYSTAL.getFluid(144))
-                    .outputItems(Registries.getItem("ae2:fluix_covered_dense_cable"), 16)
-                    .duration(512)
-                    .EUt(GTValues.V[GTValues.IV])
-                    .save(provider);
-            GENERAL_PURPOSE_AE_PRODUCTION_RECIPES.recipeBuilder("gtl_ex_ae2_fluix_cable_5")
-                    .circuitMeta(5)
-                    .chancedInput(new ItemStack(Registries.getItem("ae2:quartz_fiber")), 9000, 0)
-                    .inputFluids(GTL_Extend_Materials.FLUIXCRYSTAL.getFluid(144))
-                    .outputItems(Registries.getItem("ae2:fluix_smart_dense_cable"), 16)
-                    .duration(512)
-                    .EUt(GTValues.V[GTValues.IV])
-                    .save(provider);
-            GENERAL_PURPOSE_AE_PRODUCTION_RECIPES.recipeBuilder("gtl_ex_ae2_fluix_cable_6")
-                    .circuitMeta(1)
-                    .chancedInput(new ItemStack(Registries.getItem("ae2:blank_pattern")), 9000, 0)
-                    .inputFluids(GTL_Extend_Materials.FLUIXCRYSTAL.getFluid(144))
-                    .outputItems(Registries.getItem("ae2:blank_pattern"), 8)
-                    .duration(512)
-                    .EUt(GTValues.V[GTValues.IV])
-                    .save(provider);
+
+            Object[][] aeCableConfigs = new Object[][] {
+                    // 格式: [circuitMeta, 输入物品, 输出物品, 输出数量]
+                    {1, "ae2:quartz_fiber",     "ae2:fluix_glass_cable",            16},
+                    {2, "ae2:quartz_fiber",     "ae2:fluix_covered_cable",          16},
+                    {3, "ae2:quartz_fiber",     "ae2:fluix_smart_cable",            16},
+                    {4, "ae2:quartz_fiber",     "ae2:fluix_covered_dense_cable",    16},
+                    {5, "ae2:quartz_fiber",     "ae2:fluix_smart_dense_cable",      16},
+                    {1, "ae2:blank_pattern",    "ae2:blank_pattern",                8} // 特殊处理
+            };
+
+            for (Object[] cableConfig : aeCableConfigs) {
+                int circuitMeta = (int) cableConfig[0];
+                String inputItem = (String) cableConfig[1];
+                String outputItem = (String) cableConfig[2];
+                int outputCount = (int) cableConfig[3];
+
+                // 生成配方名称后缀（移除命名空间前缀）
+                String suffix = outputItem.replace("ae2:", "");
+                if (outputItem.equals("ae2:blank_pattern")) {
+                    suffix = "blank_pattern"; // 保持与原名称一致
+                }
+
+                GENERAL_PURPOSE_AE_PRODUCTION_RECIPES.recipeBuilder("gtl_ex_ae2_fluix_cable_" + suffix)
+                        .circuitMeta(circuitMeta)
+                        .chancedInput(new ItemStack(Registries.getItem(inputItem)), 9000, 0) // 动态指定输入
+                        .inputFluids(GTL_Extend_Materials.FLUIXCRYSTAL.getFluid(144))
+                        .outputItems(Registries.getItem(outputItem), outputCount)
+                        .duration(512)
+                        .EUt(GTValues.V[GTValues.IV])
+                        .save(provider);
+            }
         }
         if (GTLExtendConfigHolder.INSTANCE.enableInfinityDreamAndDreamHostCrafting) {
-            String[] tiers = { "lv", "mv", "hv", "ev", "iv", "luv", "zpm", "uv", "uhv", "uev", "uiv", "uxv", "opv", "max" };
+
+            VOID_PUMP_RECIPES.recipeBuilder("eternal_blue_dream_vein_fluid")
+                    .circuitMeta(2)
+                    .outputFluids(ETERNALBLUEDREAM.getFluid(1296))
+                    .duration(500)
+                    .EUt(GTValues.VA[GTValues.LuV])
+                    .addData("CRier", 2)
+                    .save(provider);
 
             // 生成 LV 配方（基础）
             SUPRACHRONAL_ASSEMBLY_LINE_RECIPES.recipeBuilder("eternalbluedream_lv_processor_mainframe")
@@ -175,6 +141,7 @@ public class CustomRecipe {
                     .save(provider);
 
             // 从 MV 开始，逐级生成高阶配方
+            String[] tiers = { "lv", "mv", "hv", "ev", "iv", "luv", "zpm", "uv", "uhv", "uev", "uiv", "uxv", "opv", "max" };
             for (int i = 1; i < tiers.length; i++) {
                 String currentTier = tiers[i];
                 String prevTier = tiers[i - 1];

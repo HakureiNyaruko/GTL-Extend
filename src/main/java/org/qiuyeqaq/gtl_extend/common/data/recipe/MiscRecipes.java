@@ -1,14 +1,12 @@
 package org.qiuyeqaq.gtl_extend.common.data.recipe;
 
-import org.gtlcore.gtlcore.common.data.GTLMaterials;
-import org.gtlcore.gtlcore.utils.Registries;
-
+import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.common.data.GTItems;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
 import com.gregtechceu.gtceu.data.recipe.CustomTags;
-
 import net.minecraft.data.recipes.FinishedRecipe;
-
+import org.gtlcore.gtlcore.common.data.GTLMaterials;
+import org.gtlcore.gtlcore.utils.Registries;
 import org.qiuyeqaq.gtl_extend.common.items.Gtl_extend_Item;
 import org.qiuyeqaq.gtl_extend.common.multiblock.MultiBlockMachine;
 
@@ -21,10 +19,19 @@ import static org.gtlcore.gtlcore.common.data.GTLRecipeTypes.SUPRACHRONAL_ASSEMB
 import static org.qiuyeqaq.gtl_extend.common.blocks.Gtl_extend_Blocks.DIMENSION_CORE;
 import static org.qiuyeqaq.gtl_extend.common.blocks.Gtl_extend_Blocks.VOID_WORLD_BLOCK;
 import static org.qiuyeqaq.gtl_extend.common.machines.recipes.GTL_Extend_RecipeTypes.PLATINUM_BASE_DPROCESSING_HUB_RECIPES;
+import static org.qiuyeqaq.gtl_extend.common.machines.recipes.GTL_Extend_RecipeTypes.VOID_PUMP_RECIPES;
 
 public class MiscRecipes {
 
     public static void init(Consumer<FinishedRecipe> provider) {
+        VOID_PUMP_RECIPES.recipeBuilder("gtl_extend_oil")
+                .circuitMeta(1)
+                .outputFluids(GTMaterials.Oil.getFluid(100000))
+                .duration(500)
+                .EUt(GTValues.V[GTValues.EV])
+                .addData("CRTier", 1)
+                .save(provider);
+
         PLATINUM_BASE_DPROCESSING_HUB_RECIPES.recipeBuilder("platinum_treatment")
                 .inputItems(Registries.getItem("gtceu:platinum_group_sludge_dust"), 5000)
                 .inputItems(Registries.getItem("gtceu:sulfur_dust"), 139)

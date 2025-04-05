@@ -4,6 +4,8 @@ import com.gregtechceu.gtceu.api.capability.recipe.IO;
 import com.gregtechceu.gtceu.api.gui.GuiTextures;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
 import com.gregtechceu.gtceu.common.data.GTSoundEntries;
+import com.lowdragmc.lowdraglib.utils.LocalizationUtils;
+import net.minecraft.client.resources.language.I18n;
 
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.MULTIBLOCK;
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.register;
@@ -24,6 +26,20 @@ public class GTL_Extend_RecipeTypes {
             .setEUIO(IO.IN)
             .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
             .setSound(GTSoundEntries.MOTOR);
+    public final static GTRecipeType VOID_PUMP_RECIPES = register("void_pump", MULTIBLOCK)
+            .setMaxIOSize(1, 0, 0, 1)
+            .setEUIO(IO.IN)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW,LEFT_TO_RIGHT)
+            .addDataInfo(data -> LocalizationUtils.format("gtceu.recipe.tier_combination", getCRTier(data.getInt("CRTier"))))
+            .setSound(GTSoundEntries.MOTOR);
+
+    public static String getCRTier(int tier) {
+        if (tier == 2) {
+            return I18n.get("gtceu.tier.dimension_core");
+        } else {
+            return I18n.get("gtceu.tier.void_world_block");
+        }
+    }
 
     public static void init() {}
 }

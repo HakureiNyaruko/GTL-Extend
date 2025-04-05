@@ -13,6 +13,7 @@ import com.gregtechceu.gtceu.client.util.TooltipHelper;
 import com.gregtechceu.gtceu.common.data.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
+import org.gtlcore.gtlcore.api.pattern.GTLPredicates;
 import org.gtlcore.gtlcore.common.data.GTLRecipeTypes;
 import org.gtlcore.gtlcore.utils.TextUtil;
 import org.qiuyeqaq.gtl_extend.api.registries.GTLEXRegistration;
@@ -24,9 +25,11 @@ import org.qiuyeqaq.gtl_extend.common.machines.machines.GTL_Extend_SmallMachines
 import org.qiuyeqaq.gtl_extend.common.machines.mechanism.GeneralPurposeSteamEngine;
 import org.qiuyeqaq.gtl_extend.common.machines.recipes.GTL_Extend_RecipeTypes;
 import org.qiuyeqaq.gtl_extend.common.multiblock.electric.BlackHoleMatterDecompressor;
+import org.qiuyeqaq.gtl_extend.common.multiblock.electric.LargeVoidPumpTierCasingMachine;
 import org.qiuyeqaq.gtl_extend.common.multiblock.structure.BlackHoleMatterDecompressor.BlackHoleMatterDecompressor_MultiBlockStructure;
 import org.qiuyeqaq.gtl_extend.common.multiblock.structure.MultiBlockStructure;
 import org.qiuyeqaq.gtl_extend.common.multiblock.structure.Platinum_basedProcessingHub.Platinum_basedProcessingHub_MultiBlockStructure;
+import org.qiuyeqaq.gtl_extend.common.multiblock.structure.Void_Pump.Void_Pump_MultiBlockStructure;
 import org.qiuyeqaq.gtl_extend.config.GTLExtendConfigHolder;
 
 import java.util.List;
@@ -46,6 +49,7 @@ public class MultiBlockMachine {
     public static final MultiblockMachineDefinition SUPERFLUID_GENERAL_ENERGY_FURNACE;
     public static final MultiblockMachineDefinition BLACK_HOLE_MATTER_DECOMPRESSOR;
     public static final MultiblockMachineDefinition PLATINUM_BASE_DPROCESSING_HUB;
+    public static final MultiblockMachineDefinition LARGE_VOID_PUMP;
     public static MultiblockMachineDefinition GENERAL_PURPOSE_STEAM_ENGINE;
     public static MultiblockMachineDefinition GENERAL_PURPOSE_AE_PRODUCTION;
 
@@ -59,7 +63,7 @@ public class MultiBlockMachine {
                     .rotationState(RotationState.NON_Y_AXIS)
                     .appearanceBlock(() -> GetRegistries.getBlock("ae2:sky_stone_block"))
                     .recipeType(GTL_Extend_RecipeTypes.GENERAL_PURPOSE_AE_PRODUCTION_RECIPES)
-                    .tooltips(Component.literal("方便的生产一些AE的物品"))
+                    .tooltips(Component.literal(TextUtil.full_color("方便的生产一些AE的物品")))
                     .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                             Component.translatable("gtceu.general_ae_manufacturing_machine")))
                     .tooltipBuilder(GTL_EX_ADD)
@@ -107,8 +111,23 @@ public class MultiBlockMachine {
                         recipe1 = GTRecipeModifiers.fastParallel(machine, recipe1, 512, false).getFirst();
                         return recipe1;
                     })
-                    .tooltips(Component.literal("暴力....."))
-                    .tooltips(Component.literal("设置所有配方时间为1t,自带512并行"))
+                    .tooltips(Component.literal(TextUtil.full_color("暴力.....")))
+                    .tooltips(Component.literal(TextUtil.full_color("设置所有配方时间为1t,自带512并行")))
+                    .tooltips(Component.translatable("gtceu.machine.available_recipe_map_14.tooltip",
+                            Component.translatable("gtceu.lava_furnace"),
+                            Component.translatable("gtceu.forge_hammer"),
+                            Component.translatable("gtceu.compressor"),
+                            Component.translatable("gtceu.alloy_smelter"),
+                            Component.translatable("gtceu.macerator"),
+                            Component.translatable("gtceu.circuit_assembler"),
+                            Component.translatable("gtceu.mixer"),
+                            Component.translatable("gtceu.centrifuge"),
+                            Component.translatable("gtceu.thermal_centrifuge"),
+                            Component.translatable("gtceu.chemical_bath"),
+                            Component.translatable("gtceu.ore_washer"),
+                            Component.translatable("gtceu.large_boiler"),
+                            Component.translatable("gtceu.electric_furnace"),
+                            Component.translatable("gtceu.extractor")))
                     .tooltipBuilder(GTL_EX_ADD)
                     .pattern(definition -> MultiBlockStructure.GENERAL_PURPOSE_STEAM_ENGINE
                             .where("~", Predicates.controller(Predicates.blocks(definition.get())))
@@ -124,6 +143,34 @@ public class MultiBlockMachine {
                             GTCEu.id("block/multiblock/steam_oven"))
                     .register();
         }
+
+        LARGE_VOID_PUMP = GTLEXRegistration.REGISTRATE.multiblock("large_void_pump", (holder) -> new LargeVoidPumpTierCasingMachine(holder, "RCTier"))
+                .rotationState(RotationState.NON_Y_AXIS)
+                .appearanceBlock(HIGH_POWER_CASING)
+                .recipeType(GTL_Extend_RecipeTypes.VOID_PUMP_RECIPES)
+                .recipeModifiers(GTRecipeModifiers.PARALLEL_HATCH, GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.PERFECT_OVERCLOCK_SUBTICK))
+                .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
+                        Component.translatable("gtceu.void_pump")))
+                .tooltips(Component.literal(TextUtil.full_color("从虚拟的宇宙中抽取无尽的流体")))
+                .tooltipBuilder(GTL_EX_ADD)
+                .pattern(definition -> Void_Pump_MultiBlockStructure.VOID_PUMP
+                        .where('~', Predicates.controller(blocks(definition.getBlock())))
+                        .where(" ", Predicates.any())
+                        .where('A', Predicates.blocks(GTBlocks.HIGH_POWER_CASING.get())
+                                .or(Predicates.abilities(PartAbility.EXPORT_ITEMS).setPreviewCount(1))
+                                .or(Predicates.abilities(PartAbility.IMPORT_ITEMS).setPreviewCount(1))
+                                .or(Predicates.abilities(PartAbility.EXPORT_FLUIDS).setPreviewCount(1))
+                                .or(Predicates.abilities(PartAbility.IMPORT_FLUIDS).setPreviewCount(1))
+                                .or(Predicates.abilities(PartAbility.PARALLEL_HATCH).setMaxGlobalLimited(1))
+                                .or(Predicates.abilities(PartAbility.INPUT_ENERGY).setMaxGlobalLimited(2)))
+                        .where('B', Predicates.blocks(GetRegistries.getBlock("gtceu:stainless_steel_frame")))
+                        .where('C', Predicates.blocks(GetRegistries.getBlock("gtceu:stable_machine_casing")))
+                        .where('E', Predicates.blocks(GetRegistries.getBlock("gtceu:ev_machine_casing")))
+                        .where('D', GTLPredicates.tierCasings(Gtl_extend_Blocks.crmap, "RCTier"))
+                        .build())
+                .workableCasingRenderer(GTCEu.id("block/casings/hpca/high_power_casing"),
+                        GTCEu.id("block/multiblock/cleanroom"), false)
+                .register();
 
         SUPERFLUID_GENERAL_ENERGY_FURNACE = GTLEXRegistration.REGISTRATE.multiblock("superfluid_general_energy_furnace", WorkableElectricMultiblockMachine::new)
                 .rotationState(RotationState.NON_Y_AXIS)
@@ -216,6 +263,10 @@ public class MultiBlockMachine {
                 .rotationState(RotationState.NON_Y_AXIS)
                 .recipeType(GTL_Extend_RecipeTypes.PLATINUM_BASE_DPROCESSING_HUB_RECIPES)
                 .appearanceBlock(ADVANCED_COMPUTER_CASING)
+                .tooltips(Component.literal(TextUtil.full_color("最大并行数：int")))
+                .tooltips(Component.literal(TextUtil.full_color("一步完成铂系金属处理")))
+                .tooltips(Component.literal("可使用等离子增产"))
+                .tooltips(Component.literal("可使用等离子：氩等离子，铁等离子，镍等离子，简并态等离子"))
                 .tooltipBuilder(GTL_EX_ADD)
                 .pattern(definition -> Platinum_basedProcessingHub_MultiBlockStructure.PLATINUM_BASE_DPROCESSING_HUB
                         .where('~', Predicates.controller(blocks(definition.getBlock())))
