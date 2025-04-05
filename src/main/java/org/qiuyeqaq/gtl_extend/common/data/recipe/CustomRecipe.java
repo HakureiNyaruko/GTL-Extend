@@ -1,14 +1,17 @@
 package org.qiuyeqaq.gtl_extend.common.data.recipe;
 
+import org.gtlcore.gtlcore.utils.Registries;
+
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.data.recipe.CustomTags;
 import com.gregtechceu.gtceu.data.recipe.VanillaRecipeHelper;
-import com.tterrag.registrate.util.entry.ItemEntry;
+
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import org.gtlcore.gtlcore.utils.Registries;
+
+import com.tterrag.registrate.util.entry.ItemEntry;
 import org.qiuyeqaq.gtl_extend.common.data.GetRegistries;
 import org.qiuyeqaq.gtl_extend.common.items.Gtl_extend_Item;
 import org.qiuyeqaq.gtl_extend.common.materials.GTL_Extend_Materials;
@@ -29,13 +32,13 @@ public class CustomRecipe {
     public static void init(Consumer<FinishedRecipe> provider) {
         Object[][] magicEnergyConfigs = new Object[][] {
                 // 参数格式: [电压等级, 输出物品所在Mod的命名空间, 电缆材料名]
-                {"lv",   "gtceu",    "tin",          CustomTags.LV_CIRCUITS},
-                {"mv",   "gtl_extend", "copper",      CustomTags.MV_CIRCUITS},
-                {"hv",   "gtl_extend", "gold",        CustomTags.HV_CIRCUITS},
-                {"ev",   "gtl_extend", "aluminium",   CustomTags.EV_CIRCUITS},
-                {"iv",   "gtl_extend", "graphene",    CustomTags.IV_CIRCUITS},
-                {"luv",  "gtl_extend", "niobium_nitride", CustomTags.LuV_CIRCUITS},
-                {"zpm",  "gtl_extend", "naquadah",    CustomTags.ZPM_CIRCUITS}
+                { "lv", "gtceu", "tin", CustomTags.LV_CIRCUITS },
+                { "mv", "gtl_extend", "copper", CustomTags.MV_CIRCUITS },
+                { "hv", "gtl_extend", "gold", CustomTags.HV_CIRCUITS },
+                { "ev", "gtl_extend", "aluminium", CustomTags.EV_CIRCUITS },
+                { "iv", "gtl_extend", "graphene", CustomTags.IV_CIRCUITS },
+                { "luv", "gtl_extend", "niobium_nitride", CustomTags.LuV_CIRCUITS },
+                { "zpm", "gtl_extend", "naquadah", CustomTags.ZPM_CIRCUITS }
         };
 
         for (Object[] config : magicEnergyConfigs) {
@@ -53,8 +56,7 @@ public class CustomRecipe {
                     'A', GetRegistries.getItem("gtceu:" + tier + "_machine_casing"),
                     'B', GetRegistries.getItem("minecraft:end_crystal"),
                     'C', GetRegistries.getItem("gtceu:" + cableMaterial + "_single_cable"),
-                    'D', circuitTag
-            );
+                    'D', circuitTag);
         }
         VanillaRecipeHelper.addShapedRecipe(provider, true, "void_world_block",
                 VOID_WORLD_BLOCK.asStack(),
@@ -91,12 +93,12 @@ public class CustomRecipe {
 
             Object[][] aeCableConfigs = new Object[][] {
                     // 格式: [circuitMeta, 输入物品, 输出物品, 输出数量]
-                    {1, "ae2:quartz_fiber",     "ae2:fluix_glass_cable",            16},
-                    {2, "ae2:quartz_fiber",     "ae2:fluix_covered_cable",          16},
-                    {3, "ae2:quartz_fiber",     "ae2:fluix_smart_cable",            16},
-                    {4, "ae2:quartz_fiber",     "ae2:fluix_covered_dense_cable",    16},
-                    {5, "ae2:quartz_fiber",     "ae2:fluix_smart_dense_cable",      16},
-                    {1, "ae2:blank_pattern",    "ae2:blank_pattern",                8} // 特殊处理
+                    { 1, "ae2:quartz_fiber", "ae2:fluix_glass_cable", 16 },
+                    { 2, "ae2:quartz_fiber", "ae2:fluix_covered_cable", 16 },
+                    { 3, "ae2:quartz_fiber", "ae2:fluix_smart_cable", 16 },
+                    { 4, "ae2:quartz_fiber", "ae2:fluix_covered_dense_cable", 16 },
+                    { 5, "ae2:quartz_fiber", "ae2:fluix_smart_dense_cable", 16 },
+                    { 1, "ae2:blank_pattern", "ae2:blank_pattern", 8 } // 特殊处理
             };
 
             for (Object[] cableConfig : aeCableConfigs) {

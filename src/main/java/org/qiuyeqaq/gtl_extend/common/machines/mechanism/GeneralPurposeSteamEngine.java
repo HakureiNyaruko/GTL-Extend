@@ -1,6 +1,5 @@
 package org.qiuyeqaq.gtl_extend.common.machines.mechanism;
 
-
 import com.gregtechceu.gtceu.api.capability.recipe.EURecipeCapability;
 import com.gregtechceu.gtceu.api.capability.recipe.FluidRecipeCapability;
 import com.gregtechceu.gtceu.api.capability.recipe.IO;
@@ -20,28 +19,33 @@ import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.api.recipe.RecipeHelper;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
 import com.gregtechceu.gtceu.common.data.GTRecipeModifiers;
+
 import com.lowdragmc.lowdraglib.gui.modular.ModularUI;
 import com.lowdragmc.lowdraglib.gui.widget.*;
 import com.lowdragmc.lowdraglib.syncdata.annotation.Persisted;
 import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder;
+
 import net.minecraft.ChatFormatting;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.HoverEvent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.world.entity.player.Player;
+
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import javax.annotation.ParametersAreNonnullByDefault;
 
 import static org.gtlcore.gtlcore.common.data.GTLMachines.LARGE_STEAM_HATCH;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class GeneralPurposeSteamEngine extends WorkableMultiblockMachine implements IFancyUIMachine, IDisplayUIMachine {
+
     protected static final ManagedFieldHolder MANAGED_FIELD_HOLDER = new ManagedFieldHolder(
             GeneralPurposeSteamEngine.class, WorkableMultiblockMachine.MANAGED_FIELD_HOLDER);
     // if in millibuckets, this is 0.5, Meaning 2mb of steam -> 1 EU

@@ -1,18 +1,23 @@
 package org.qiuyeqaq.gtl_extend.common.data.recipe;
 
+import org.gtlcore.gtlcore.common.data.GTLMaterials;
+import org.gtlcore.gtlcore.utils.Registries;
+
 import com.gregtechceu.gtceu.api.GTValues;
+import com.gregtechceu.gtceu.api.fluids.store.FluidStorageKeys;
 import com.gregtechceu.gtceu.common.data.GTItems;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
 import com.gregtechceu.gtceu.data.recipe.CustomTags;
+
 import net.minecraft.data.recipes.FinishedRecipe;
-import org.gtlcore.gtlcore.common.data.GTLMaterials;
-import org.gtlcore.gtlcore.utils.Registries;
+
 import org.qiuyeqaq.gtl_extend.common.items.Gtl_extend_Item;
 import org.qiuyeqaq.gtl_extend.common.multiblock.MultiBlockMachine;
 
 import java.util.function.Consumer;
 
 import static com.gregtechceu.gtceu.api.GTValues.*;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.*;
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.ASSEMBLER_RECIPES;
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.ASSEMBLY_LINE_RECIPES;
 import static org.gtlcore.gtlcore.common.data.GTLRecipeTypes.SUPRACHRONAL_ASSEMBLY_LINE_RECIPES;
@@ -32,7 +37,7 @@ public class MiscRecipes {
                 .addData("CRTier", 1)
                 .save(provider);
 
-        PLATINUM_BASE_DPROCESSING_HUB_RECIPES.recipeBuilder("platinum_treatment")
+        PLATINUM_BASE_DPROCESSING_HUB_RECIPES.recipeBuilder("platinum_treatment_1")
                 .inputItems(Registries.getItem("gtceu:platinum_group_sludge_dust"), 5000)
                 .inputItems(Registries.getItem("gtceu:sulfur_dust"), 139)
                 .inputFluids(GTMaterials.Hydrogen.getFluid(625000))
@@ -47,6 +52,86 @@ public class MiscRecipes {
                 .outputFluids(GTMaterials.Hydrogen.getFluid(25000))
                 .outputFluids(GTMaterials.Chlorine.getFluid(56000))
                 .outputFluids(GTMaterials.Water.getFluid(62500))
+                .duration(200)
+                .EUt(VA[LuV])
+                .save(provider);
+
+        PLATINUM_BASE_DPROCESSING_HUB_RECIPES.recipeBuilder("platinum_treatment_1")
+                .inputItems(Registries.getItem("gtceu:platinum_group_sludge_dust"), 5000)
+                .inputItems(Registries.getItem("gtceu:sulfur_dust"), 139)
+                .inputFluids(GTMaterials.Hydrogen.getFluid(625000))
+                .inputFluids(GTMaterials.Oxygen.getFluid(1111000))
+                .inputFluids(GTMaterials.Chlorine.getFluid(125000))
+                .inputFluids(Argon.getFluid(FluidStorageKeys.PLASMA, 1000))
+                .outputItems(Registries.getItem("gtceu:platinum_dust"), 833)
+                .outputItems(Registries.getItem("gtceu:palladium_dust"), 833)
+                .outputItems(Registries.getItem("gtceu:ruthenium_dust"), 833)
+                .outputItems(Registries.getItem("gtceu:iridium_dust"), 417)
+                .outputItems(Registries.getItem("gtceu:osmium_dust"), 417)
+                .outputItems(Registries.getItem("gtceu:rhodium_dust"), 625)
+                .outputFluids(GTMaterials.Hydrogen.getFluid(37500))
+                .outputFluids(GTMaterials.Chlorine.getFluid(84000))
+                .outputFluids(GTMaterials.Water.getFluid(93750))
+                .duration(200)
+                .EUt(VA[LuV])
+                .save(provider);
+
+        PLATINUM_BASE_DPROCESSING_HUB_RECIPES.recipeBuilder("platinum_treatment_2")
+                .inputItems(Registries.getItem("gtceu:platinum_group_sludge_dust"), 5000)
+                .inputItems(Registries.getItem("gtceu:sulfur_dust"), 139)
+                .inputFluids(GTMaterials.Hydrogen.getFluid(625000))
+                .inputFluids(GTMaterials.Oxygen.getFluid(1111000))
+                .inputFluids(GTMaterials.Chlorine.getFluid(125000))
+                .inputFluids(Iron.getFluid(FluidStorageKeys.PLASMA, 1000))
+                .outputItems(Registries.getItem("gtceu:platinum_dust"), 555 * 2)
+                .outputItems(Registries.getItem("gtceu:palladium_dust"), 555 * 2)
+                .outputItems(Registries.getItem("gtceu:ruthenium_dust"), 555 * 2)
+                .outputItems(Registries.getItem("gtceu:iridium_dust"), 278 * 2)
+                .outputItems(Registries.getItem("gtceu:osmium_dust"), 278 * 2)
+                .outputItems(Registries.getItem("gtceu:rhodium_dust"), 417 * 2)
+                .outputFluids(GTMaterials.Hydrogen.getFluid(25000 * 2))
+                .outputFluids(GTMaterials.Chlorine.getFluid(56000 * 2))
+                .outputFluids(GTMaterials.Water.getFluid(62500 * 2))
+                .duration(200)
+                .EUt(VA[LuV])
+                .save(provider);
+
+        PLATINUM_BASE_DPROCESSING_HUB_RECIPES.recipeBuilder("platinum_treatment_3")
+                .inputItems(Registries.getItem("gtceu:platinum_group_sludge_dust"), 5000)
+                .inputItems(Registries.getItem("gtceu:sulfur_dust"), 139)
+                .inputFluids(GTMaterials.Hydrogen.getFluid(625000))
+                .inputFluids(GTMaterials.Oxygen.getFluid(1111000))
+                .inputFluids(GTMaterials.Chlorine.getFluid(125000))
+                .inputFluids(Nickel.getFluid(FluidStorageKeys.PLASMA, 1000))
+                .outputItems(Registries.getItem("gtceu:platinum_dust"), 555 * 3)
+                .outputItems(Registries.getItem("gtceu:palladium_dust"), 555 * 3)
+                .outputItems(Registries.getItem("gtceu:ruthenium_dust"), 555 * 3)
+                .outputItems(Registries.getItem("gtceu:iridium_dust"), 278 * 3)
+                .outputItems(Registries.getItem("gtceu:osmium_dust"), 278 * 3)
+                .outputItems(Registries.getItem("gtceu:rhodium_dust"), 417 * 3)
+                .outputFluids(GTMaterials.Hydrogen.getFluid(25000 * 3))
+                .outputFluids(GTMaterials.Chlorine.getFluid(56000 * 3))
+                .outputFluids(GTMaterials.Water.getFluid(62500 * 3))
+                .duration(200)
+                .EUt(VA[LuV])
+                .save(provider);
+
+        PLATINUM_BASE_DPROCESSING_HUB_RECIPES.recipeBuilder("platinum_treatment_4")
+                .inputItems(Registries.getItem("gtceu:platinum_group_sludge_dust"), 5000)
+                .inputItems(Registries.getItem("gtceu:sulfur_dust"), 139)
+                .inputFluids(GTMaterials.Hydrogen.getFluid(625000))
+                .inputFluids(GTMaterials.Oxygen.getFluid(1111000))
+                .inputFluids(GTMaterials.Chlorine.getFluid(125000))
+                .inputFluids(GTLMaterials.DegenerateRhenium.getFluid(FluidStorageKeys.PLASMA, 1000))
+                .outputItems(Registries.getItem("gtceu:platinum_dust"), 555 * 5)
+                .outputItems(Registries.getItem("gtceu:palladium_dust"), 555 * 5)
+                .outputItems(Registries.getItem("gtceu:ruthenium_dust"), 555 * 5)
+                .outputItems(Registries.getItem("gtceu:iridium_dust"), 278 * 5)
+                .outputItems(Registries.getItem("gtceu:osmium_dust"), 278 * 5)
+                .outputItems(Registries.getItem("gtceu:rhodium_dust"), 417 * 5)
+                .outputFluids(GTMaterials.Hydrogen.getFluid(25000 * 5))
+                .outputFluids(GTMaterials.Chlorine.getFluid(56000 * 5))
+                .outputFluids(GTMaterials.Water.getFluid(62500 * 5))
                 .duration(200)
                 .EUt(VA[LuV])
                 .save(provider);

@@ -25,7 +25,7 @@ public class GTLExtendConfigHolder {
     public boolean enableGeneralPurposeSteamEngine = false;
     @Configurable
     @Configurable.Comment("开启通用AE制造机（修改后请退出重进）")
-    public boolean enableGeneralAEManufacturingMachine= false;
+    public boolean enableGeneralAEManufacturingMachine = false;
 
     public static void init() {
         synchronized (LOCK) {

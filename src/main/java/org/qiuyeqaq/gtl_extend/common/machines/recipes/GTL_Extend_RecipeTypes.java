@@ -4,7 +4,9 @@ import com.gregtechceu.gtceu.api.capability.recipe.IO;
 import com.gregtechceu.gtceu.api.gui.GuiTextures;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
 import com.gregtechceu.gtceu.common.data.GTSoundEntries;
+
 import com.lowdragmc.lowdraglib.utils.LocalizationUtils;
+
 import net.minecraft.client.resources.language.I18n;
 
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.MULTIBLOCK;
@@ -18,7 +20,7 @@ public class GTL_Extend_RecipeTypes {
             .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
             .setSound(GTSoundEntries.SCIENCE);
     public final static GTRecipeType PLATINUM_BASE_DPROCESSING_HUB_RECIPES = register("one_stop_platinum_treatment", MULTIBLOCK)
-            .setMaxIOSize(2, 6, 3, 3)
+            .setMaxIOSize(2, 6, 4, 3)
             .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
             .setSound(GTSoundEntries.FURNACE);
     public final static GTRecipeType GENERAL_PURPOSE_AE_PRODUCTION_RECIPES = register("general_ae_manufacturing_machine", MULTIBLOCK)
@@ -29,7 +31,7 @@ public class GTL_Extend_RecipeTypes {
     public final static GTRecipeType VOID_PUMP_RECIPES = register("void_pump", MULTIBLOCK)
             .setMaxIOSize(1, 0, 0, 1)
             .setEUIO(IO.IN)
-            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW,LEFT_TO_RIGHT)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
             .addDataInfo(data -> LocalizationUtils.format("gtceu.recipe.tier_combination", getCRTier(data.getInt("CRTier"))))
             .setSound(GTSoundEntries.MOTOR);
 

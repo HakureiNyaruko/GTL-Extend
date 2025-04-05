@@ -1,8 +1,7 @@
 package org.qiuyeqaq.gtl_extend.common.blocks;
 
 import com.gregtechceu.gtceu.api.item.tool.GTToolType;
-import com.tterrag.registrate.util.entry.BlockEntry;
-import com.tterrag.registrate.util.nullness.NonNullSupplier;
+
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -10,6 +9,9 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
+
+import com.tterrag.registrate.util.entry.BlockEntry;
+import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import org.qiuyeqaq.gtl_extend.Gtl_extend;
 import org.qiuyeqaq.gtl_extend.common.data.GTL_Extend_CreativeModeTabs;
 
@@ -33,7 +35,7 @@ public class Gtl_extend_Blocks {
      *         () -> RenderType::cutoutMipped //不透明
      */
 
-    public static Map<Integer,Supplier<Block>> crmap = new HashMap<>();
+    public static Map<Integer, Supplier<Block>> crmap = new HashMap<>();
     public static final BlockEntry<Block> DIMENSION_CORE = createCasingBlock(
             "dimension_core",
             Gtl_extend.id("block/dimension_core"),
@@ -45,7 +47,7 @@ public class Gtl_extend_Blocks {
             Gtl_extend.id("block/void_world_block"),
             () -> RenderType::cutoutMipped,
             () -> Blocks.NETHERITE_BLOCK,
-            crmap,1);
+            crmap, 1);
 
     public static void init() {}
 
@@ -53,7 +55,8 @@ public class Gtl_extend_Blocks {
                                                       String name,
                                                       ResourceLocation texture,
                                                       Supplier<Supplier<RenderType>> renderType,
-                                                      NonNullSupplier<? extends Block> baseProperties) {                              // 新增参数：层级标识) {
+                                                      NonNullSupplier<? extends Block> baseProperties) {                              // 新增参数：层级标识)
+                                                                                                                                      // {
         BlockEntry<Block> blockEntry = REGISTRATE.block(name, Block::new)
                 .initialProperties(baseProperties)
                 .properties(p -> p
@@ -74,16 +77,16 @@ public class Gtl_extend_Blocks {
         REGISTRATE.setCreativeTab(blockEntry, GTL_Extend_CreativeModeTabs.BLOCKS_ITEM);
         return blockEntry;
     }
+
     public static BlockEntry<Block> createCasingBlock(
-            String name,
-            ResourceLocation texture,
-            Supplier<Supplier<RenderType>> renderType,
-            NonNullSupplier<? extends Block> baseProperties,
-            Map<Integer, Supplier<Block>> targetMap,
-            int tier) {
+                                                      String name,
+                                                      ResourceLocation texture,
+                                                      Supplier<Supplier<RenderType>> renderType,
+                                                      NonNullSupplier<? extends Block> baseProperties,
+                                                      Map<Integer, Supplier<Block>> targetMap,
+                                                      int tier) {
         BlockEntry<Block> blockEntry = createCasingBlock(name, texture, renderType, baseProperties);
         targetMap.put(tier, blockEntry::get);
         return blockEntry;
     }
-
 }

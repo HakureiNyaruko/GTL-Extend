@@ -1,6 +1,9 @@
 package org.qiuyeqaq.gtl_extend.common.multiblock;
 
-import appeng.core.AppEng;
+import org.gtlcore.gtlcore.api.pattern.GTLPredicates;
+import org.gtlcore.gtlcore.common.data.GTLRecipeTypes;
+import org.gtlcore.gtlcore.utils.TextUtil;
+
 import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.data.RotationState;
 import com.gregtechceu.gtceu.api.machine.MultiblockMachineDefinition;
@@ -11,11 +14,11 @@ import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.api.recipe.OverclockingLogic;
 import com.gregtechceu.gtceu.client.util.TooltipHelper;
 import com.gregtechceu.gtceu.common.data.*;
+
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
-import org.gtlcore.gtlcore.api.pattern.GTLPredicates;
-import org.gtlcore.gtlcore.common.data.GTLRecipeTypes;
-import org.gtlcore.gtlcore.utils.TextUtil;
+
+import appeng.core.AppEng;
 import org.qiuyeqaq.gtl_extend.api.registries.GTLEXRegistration;
 import org.qiuyeqaq.gtl_extend.client.renderer.machine.BlackHoleMatterDecompressor_Render;
 import org.qiuyeqaq.gtl_extend.common.blocks.Gtl_extend_Blocks;
@@ -263,7 +266,6 @@ public class MultiBlockMachine {
                 .rotationState(RotationState.NON_Y_AXIS)
                 .recipeType(GTL_Extend_RecipeTypes.PLATINUM_BASE_DPROCESSING_HUB_RECIPES)
                 .appearanceBlock(ADVANCED_COMPUTER_CASING)
-                .tooltips(Component.literal(TextUtil.full_color("最大并行数：int")))
                 .tooltips(Component.literal(TextUtil.full_color("一步完成铂系金属处理")))
                 .tooltips(Component.literal("可使用等离子增产"))
                 .tooltips(Component.literal("可使用等离子：氩等离子，铁等离子，镍等离子，简并态等离子"))
@@ -296,4 +298,6 @@ public class MultiBlockMachine {
     public static void init() {
         GTL_Extend_SmallMachines.init();
     }
+
+    private record HyperFuelData(int parallel, float bonus) {}
 }
