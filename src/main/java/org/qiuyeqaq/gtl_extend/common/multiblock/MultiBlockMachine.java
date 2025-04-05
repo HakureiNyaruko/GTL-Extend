@@ -9,8 +9,10 @@ import com.gregtechceu.gtceu.api.machine.multiblock.WorkableElectricMultiblockMa
 import com.gregtechceu.gtceu.api.pattern.Predicates;
 import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.api.recipe.OverclockingLogic;
+import com.gregtechceu.gtceu.client.util.TooltipHelper;
 import com.gregtechceu.gtceu.common.data.*;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.ItemStack;
 import org.gtlcore.gtlcore.common.data.GTLRecipeTypes;
 import org.gtlcore.gtlcore.utils.TextUtil;
 import org.qiuyeqaq.gtl_extend.api.registries.GTLEXRegistration;
@@ -27,12 +29,19 @@ import org.qiuyeqaq.gtl_extend.common.multiblock.structure.MultiBlockStructure;
 import org.qiuyeqaq.gtl_extend.common.multiblock.structure.Platinum_basedProcessingHub.Platinum_basedProcessingHub_MultiBlockStructure;
 import org.qiuyeqaq.gtl_extend.config.GTLExtendConfigHolder;
 
+import java.util.List;
+import java.util.function.BiConsumer;
+
 import static com.gregtechceu.gtceu.api.pattern.Predicates.blocks;
 import static com.gregtechceu.gtceu.common.data.GCyMBlocks.CASING_HIGH_TEMPERATURE_SMELTING;
 import static com.gregtechceu.gtceu.common.data.GTBlocks.ADVANCED_COMPUTER_CASING;
 import static com.gregtechceu.gtceu.common.data.GTBlocks.HIGH_POWER_CASING;
 
 public class MultiBlockMachine {
+
+    public static final BiConsumer<ItemStack, List<Component>> GTL_EX_ADD = (stack, components) -> components
+            .add(Component.translatable("gtl_extend.registry.add")
+                    .withStyle(style -> style.withColor(TooltipHelper.RAINBOW_SLOW.getCurrent())));
 
     public static final MultiblockMachineDefinition SUPERFLUID_GENERAL_ENERGY_FURNACE;
     public static final MultiblockMachineDefinition BLACK_HOLE_MATTER_DECOMPRESSOR;
@@ -53,6 +62,7 @@ public class MultiBlockMachine {
                     .tooltips(Component.literal("方便的生产一些AE的物品"))
                     .tooltips(Component.translatable("gtceu.machine.available_recipe_map_1.tooltip",
                             Component.translatable("gtceu.general_ae_manufacturing_machine")))
+                    .tooltipBuilder(GTL_EX_ADD)
                     .recipeModifiers(GTRecipeModifiers.PARALLEL_HATCH, GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.PERFECT_OVERCLOCK_SUBTICK))
                     .pattern(definition -> MultiBlockStructure.GENERAL_PURPOSE_AE_PRODUCTION
                             .where("~", Predicates.controller(Predicates.blocks(definition.get())))
@@ -99,6 +109,7 @@ public class MultiBlockMachine {
                     })
                     .tooltips(Component.literal("暴力....."))
                     .tooltips(Component.literal("设置所有配方时间为1t,自带512并行"))
+                    .tooltipBuilder(GTL_EX_ADD)
                     .pattern(definition -> MultiBlockStructure.GENERAL_PURPOSE_STEAM_ENGINE
                             .where("~", Predicates.controller(Predicates.blocks(definition.get())))
                             .where("B", Predicates.blocks(Gtl_extend_Blocks.VOID_WORLD_BLOCK.get()))
@@ -137,7 +148,7 @@ public class MultiBlockMachine {
                         Component.translatable("gtceu.electric_blast_furnace"),
                         Component.translatable("gtceu.alloy_blast_smelter"),
                         Component.translatable("gtceu.alloy_smelter")))
-                .tooltips(Component.literal(TextUtil.full_color("由GTL_Extend添加")))
+                .tooltipBuilder(GTL_EX_ADD)
                 .pattern(definition -> MultiBlockStructure.GENERAL_ENERGY_FURNACE
                         .where('~', Predicates.controller(blocks(definition.getBlock())))
                         .where(' ', Predicates.any())
@@ -171,7 +182,7 @@ public class MultiBlockMachine {
                 .tooltips(Component.translatable("gtceu.machine.available_recipe_map_2.tooltip",
                         Component.translatable("gtceu.cosmos_simulation"),
                         Component.translatable("gtceu.horizon_matter_decompression")))
-                .tooltips(Component.literal(TextUtil.full_color("由GTL_Extend添加")))
+                .tooltipBuilder(GTL_EX_ADD)
                 .pattern(definition -> BlackHoleMatterDecompressor_MultiBlockStructure.BLACK_HOLE_DECOMPRESSION
                         .where('~', Predicates.controller(blocks(definition.getBlock())))
                         .where(" ", Predicates.any())
@@ -205,6 +216,7 @@ public class MultiBlockMachine {
                 .rotationState(RotationState.NON_Y_AXIS)
                 .recipeType(GTL_Extend_RecipeTypes.PLATINUM_BASE_DPROCESSING_HUB_RECIPES)
                 .appearanceBlock(ADVANCED_COMPUTER_CASING)
+                .tooltipBuilder(GTL_EX_ADD)
                 .pattern(definition -> Platinum_basedProcessingHub_MultiBlockStructure.PLATINUM_BASE_DPROCESSING_HUB
                         .where('~', Predicates.controller(blocks(definition.getBlock())))
                         .where(' ', Predicates.any())
