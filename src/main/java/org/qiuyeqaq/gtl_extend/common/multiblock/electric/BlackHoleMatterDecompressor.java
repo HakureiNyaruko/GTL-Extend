@@ -45,7 +45,7 @@ public class BlackHoleMatterDecompressor extends NoEnergyMultiblockMachine {
     // 常量定义
     private static final int BASE_PARALLEL = 64;
     private static final long BASE_EU_COST = 5277655810867200L;
-
+    private static final Object ocLock = new Object();
     @Persisted
     private static long eternalbluedream = 0; // 永恒蓝梦流体存储量
     @Persisted
@@ -67,30 +67,16 @@ public class BlackHoleMatterDecompressor extends NoEnergyMultiblockMachine {
         return GTLExtendConfigHolder.INSTANCE != null && GTLExtendConfigHolder.INSTANCE.enableInfinityDreamAndDreamHostCrafting != false;
     }
 
-    // 计算基础并行（电路编号的8次方，1号特殊处理）
-    private static int getBaseParallel() {
-        if (oc == 1) return BASE_PARALLEL;
-        return (int) Math.pow(oc, 8);
-    }
-
-    // 计算实际并行（考虑蓝梦流体加成）
-    private static int calculateParallel() {
-        int base = getBaseParallel();
-        if (!isInfinityDreamEnabled()) return base;
-
-        // 每1000B流体翻倍一次，但不超过int最大值
-        long multiplier = eternalbluedream / 1_000_000_000L;
-        return (int) Math.min(base * (1000L << multiplier), Integer.MAX_VALUE);
-    }
-
     // 获取超频次数（电路配置映射）
     private static int calculateOverclockTimes() {
-        return switch (Math.min(oc, 4)) { // 4号以上按4号处理
-            case 2 -> 1;
-            case 3 -> 2;
-            case 4 -> 3;
-            default -> 1; // 1号和其他情况不超频
-        };
+        synchronized (ocLock) {
+            return switch (Math.min(oc, 4)) {
+                case 2 -> 1;
+                case 3 -> 2;
+                case 4 -> 3;
+                default -> 1;
+            };
+        }
     }
 
     // 计算启动能耗
@@ -105,30 +91,49 @@ public class BlackHoleMatterDecompressor extends NoEnergyMultiblockMachine {
                                           @NotNull GTRecipe recipe,
                                           @NotNull OCParams params,
                                           @NotNull OCResult result) {
-        if (machine instanceof BlackHoleMatterDecompressor decompressor && BlackHoleMatterDecompressor.oc != 0) {
+        if (machine instanceof BlackHoleMatterDecompressor decompressor) {
+            synchronized (ocLock) {
+                if (oc == 0) return null;
+                // 根据额外流体计算并行数
+                int parallel = calculateParallel();
+                long euCost = getRecipeEUt();
 
-            // 根据额外流体计算并行数
-            int parallel = decompressor.calculateParallel();
-            long euCost = decompressor.getRecipeEUt();
+                if (decompressor.userId != null &&
+                        WirelessEnergyManager.addEUToGlobalEnergyMap(
+                                decompressor.userId,
+                                -euCost,
+                                machine)) {
 
-            if (decompressor.userId != null &&
-                    WirelessEnergyManager.addEUToGlobalEnergyMap(
-                            decompressor.userId,
-                            -euCost,
-                            machine)) {
+                    GTRecipe modifiedRecipe = recipe.copy();
+                    modifiedRecipe.duration = (int) (4800 / Math.pow(2, BlackHoleMatterDecompressor.oc));
 
-                GTRecipe modifiedRecipe = recipe.copy();
-                modifiedRecipe.duration = (int) (4800 / Math.pow(2, BlackHoleMatterDecompressor.oc));
-
-                // 应用精确并行处理并返回结果
-                return GTRecipeModifiers.accurateParallel(
-                        machine,
-                        modifiedRecipe,
-                        calculateParallel(),
-                        false).getFirst();
+                    // 应用精确并行处理并返回结果
+                    return GTRecipeModifiers.accurateParallel(
+                            machine,
+                            modifiedRecipe,
+                            calculateParallel(),
+                            false).getFirst();
+                }
             }
         }
         return null;
+    }
+
+    // 计算实际并行（考虑蓝梦流体加成）
+    private static int calculateParallel() {
+        int base = getBaseParallel();
+        if (!isInfinityDreamEnabled()) return base;
+
+        // 每1000B流体翻倍一次，但不超过int最大值
+        long multiplier = eternalbluedream / 1_000_000_000L;
+        return (int) Math.min(base * (1000L << multiplier), Integer.MAX_VALUE);
+    }
+
+    // 计算基础并行（电路编号的8次方，1号特殊处理）
+    private static int getBaseParallel() {
+        synchronized (ocLock) {
+            return (oc == 1) ? BASE_PARALLEL : (int) Math.pow(oc, 8);
+        }
     }
 
     @Override
@@ -140,15 +145,16 @@ public class BlackHoleMatterDecompressor extends NoEnergyMultiblockMachine {
     @Override
     public void onStructureFormed() {
         super.onStructureFormed();
-        // 按优先级 8 > 4 > 3 > 2 > 1 检测电路
         int[] priorityOrder = { 8, 7, 6, 5, 4, 3, 2, 1 };
-        for (int config : priorityOrder) {
-            if (MachineIO.notConsumableCircuit(this, config)) {
-                oc = config;
-                return;
+        synchronized (ocLock) { // 同步修改
+            for (int config : priorityOrder) {
+                if (MachineIO.notConsumableCircuit(this, config)) {
+                    oc = config;
+                    return;
+                }
             }
+            oc = 0;
         }
-        oc = 0; // 默认值
     }
 
     // 流体输入处理（每tick执行）
