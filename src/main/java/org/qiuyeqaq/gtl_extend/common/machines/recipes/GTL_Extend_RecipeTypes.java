@@ -1,5 +1,6 @@
 package org.qiuyeqaq.gtl_extend.common.machines.recipes;
 
+import com.gregtechceu.gtceu.api.capability.recipe.IO;
 import com.gregtechceu.gtceu.api.gui.GuiTextures;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
 import com.gregtechceu.gtceu.common.data.GTSoundEntries;
@@ -18,6 +19,11 @@ public class GTL_Extend_RecipeTypes {
             .setMaxIOSize(2, 6, 3, 3)
             .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
             .setSound(GTSoundEntries.FURNACE);
+    public final static GTRecipeType GENERAL_PURPOSE_AE_PRODUCTION_RECIPES = register("general_ae_manufacturing_machine", MULTIBLOCK)
+            .setMaxIOSize(10, 1, 10, 1)
+            .setEUIO(IO.IN)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
+            .setSound(GTSoundEntries.MOTOR);
 
     public static void init() {}
 }
