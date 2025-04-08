@@ -20,17 +20,17 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class LargeVoidPumpTierCasingMachine extends WorkableElectricMultiblockMachine {
+public class CRTierCasingMachine extends WorkableElectricMultiblockMachine {
 
     public static final ManagedFieldHolder MANAGED_FIELD_HOLDER = new ManagedFieldHolder(
-            LargeVoidPumpTierCasingMachine.class, WorkableMultiblockMachine.MANAGED_FIELD_HOLDER);
+            CRTierCasingMachine.class, WorkableMultiblockMachine.MANAGED_FIELD_HOLDER);
 
     private final String tierType;
 
     @Persisted
     private int tier = 0;
 
-    public LargeVoidPumpTierCasingMachine(IMachineBlockEntity holder, String tierType, Object... args) {
+    public CRTierCasingMachine(IMachineBlockEntity holder, String tierType, Object... args) {
         super(holder, args);
         this.tierType = tierType;
     }

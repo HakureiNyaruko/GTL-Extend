@@ -42,11 +42,11 @@ import java.util.function.Consumer;
 public class BlackHoleMatterDecompressor_Render extends WorkableCasingMachineRenderer implements IControllerRenderer {
 
     // 黑洞核心模型
-    private static final ResourceLocation EVENT_HORIZON_MODEL = Gtl_extend.id("textures/rendered/black_hole");
+    private static final ResourceLocation EVENT_HORIZON_MODEL = Gtl_extend.id("rendered/black_hole/black_hole");
     // 吸积盘模型
-    private static final ResourceLocation ACCRETION_DISK_MODEL = Gtl_extend.id("textures/rendered/accretion_disk");
+    private static final ResourceLocation ACCRETION_DISK_MODEL = Gtl_extend.id("rendered/black_hole/accretion_disk");
     // 光晕纹理
-    private static final ResourceLocation GLOW_TEXTURE = Gtl_extend.id("textures/entity/black_hole_glow.png");
+    private static final ResourceLocation GLOW_TEXTURE = Gtl_extend.id("rendered/black_hole/black_hole_glow");
     // 吸积盘层数
     private static final int DISK_LAYERS = 3;
 

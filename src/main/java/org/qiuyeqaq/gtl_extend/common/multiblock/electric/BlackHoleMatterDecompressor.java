@@ -1,38 +1,32 @@
 package org.qiuyeqaq.gtl_extend.common.multiblock.electric;
 
-import org.gtlcore.gtlcore.api.machine.multiblock.NoEnergyMultiblockMachine;
-import org.gtlcore.gtlcore.utils.MachineIO;
-
 import com.gregtechceu.gtceu.api.machine.ConditionalSubscriptionHandler;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
-import com.gregtechceu.gtceu.api.machine.MetaMachine;
 import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.api.recipe.logic.OCParams;
 import com.gregtechceu.gtceu.api.recipe.logic.OCResult;
 import com.gregtechceu.gtceu.common.data.GTRecipeModifiers;
 import com.gregtechceu.gtceu.utils.FormattingUtil;
-
+import com.hepdd.gtmthings.api.misc.WirelessEnergyManager;
+import com.hepdd.gtmthings.utils.TeamUtil;
 import com.lowdragmc.lowdraglib.side.fluid.FluidStack;
 import com.lowdragmc.lowdraglib.syncdata.annotation.Persisted;
 import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder;
-
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.BlockHitResult;
-
-import com.hepdd.gtmthings.api.misc.WirelessEnergyManager;
-import com.hepdd.gtmthings.utils.TeamUtil;
+import org.gtlcore.gtlcore.api.machine.multiblock.NoEnergyMultiblockMachine;
+import org.gtlcore.gtlcore.utils.MachineIO;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.qiuyeqaq.gtl_extend.config.GTLExtendConfigHolder;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.math.BigInteger;
 import java.util.List;
 import java.util.UUID;
-
-import javax.annotation.ParametersAreNonnullByDefault;
 
 import static org.qiuyeqaq.gtl_extend.common.materials.GTL_Extend_Materials.ETERNALBLUEDREAM;
 
@@ -45,14 +39,15 @@ public class BlackHoleMatterDecompressor extends NoEnergyMultiblockMachine {
     // 常量定义
     private static final int BASE_PARALLEL = 64;
     private static final long BASE_EU_COST = 5277655810867200L;
-    private static final Object ocLock = new Object();
-    @Persisted
-    private static long eternalbluedream = 0; // 永恒蓝梦流体存储量
-    @Persisted
-    private static int oc = 0;     // 当前电路配置编号
     @Persisted
     private static int circuitConfig = 0;
+    // 将ocLock改为实例变量
+    private final Object ocLock = new Object();
     protected ConditionalSubscriptionHandler StartupSubs;
+    @Persisted
+    private long eternalbluedream = 0; // 永恒蓝梦流体存储量
+    @Persisted
+    private int oc = 0;     // 当前电路配置编号
     @Persisted
     @Nullable
     private UUID userId;// 绑定用户ID
@@ -67,8 +62,38 @@ public class BlackHoleMatterDecompressor extends NoEnergyMultiblockMachine {
         return GTLExtendConfigHolder.INSTANCE != null && GTLExtendConfigHolder.INSTANCE.enableInfinityDreamAndDreamHostCrafting != false;
     }
 
+    @Nullable
+    public GTRecipe recipeModifier(
+                                   @NotNull GTRecipe recipe,
+                                   @NotNull OCParams params,
+                                   @NotNull OCResult result) {
+        synchronized (ocLock) {
+            if (this.oc == 0) return null;
+            int parallel = calculateParallel(); // 直接调用实例方法
+            long euCost = getRecipeEUt(); // 直接调用实例方法
+
+            if (this.userId != null &&
+                    WirelessEnergyManager.addEUToGlobalEnergyMap(
+                            this.userId,
+                            -euCost,
+                            this)) {
+
+                GTRecipe modifiedRecipe = recipe.copy();
+                modifiedRecipe.duration = (int) (4800 / Math.pow(2, this.oc));
+
+                // 应用精确并行处理并返回结果
+                return GTRecipeModifiers.accurateParallel(
+                        this, // 传入当前实例
+                        modifiedRecipe,
+                        parallel,
+                        false).getFirst();
+            }
+        }
+        return null;
+    }
+
     // 获取超频次数（电路配置映射）
-    private static int calculateOverclockTimes() {
+    private int calculateOverclockTimes() {
         synchronized (ocLock) {
             return switch (Math.min(oc, 4)) {
                 case 2 -> 1;
@@ -80,57 +105,23 @@ public class BlackHoleMatterDecompressor extends NoEnergyMultiblockMachine {
     }
 
     // 计算启动能耗
-    private static long getRecipeEUt() {
+    private long getRecipeEUt() {
         int ocTimes = calculateOverclockTimes();
-        return (long) (BASE_EU_COST * Math.pow(16, ocTimes));
-    }
-
-    @Nullable
-    public static GTRecipe recipeModifier(
-                                          MetaMachine machine,
-                                          @NotNull GTRecipe recipe,
-                                          @NotNull OCParams params,
-                                          @NotNull OCResult result) {
-        if (machine instanceof BlackHoleMatterDecompressor decompressor) {
-            synchronized (ocLock) {
-                if (oc == 0) return null;
-                // 根据额外流体计算并行数
-                int parallel = calculateParallel();
-                long euCost = getRecipeEUt();
-
-                if (decompressor.userId != null &&
-                        WirelessEnergyManager.addEUToGlobalEnergyMap(
-                                decompressor.userId,
-                                -euCost,
-                                machine)) {
-
-                    GTRecipe modifiedRecipe = recipe.copy();
-                    modifiedRecipe.duration = (int) (4800 / Math.pow(2, BlackHoleMatterDecompressor.oc));
-
-                    // 应用精确并行处理并返回结果
-                    return GTRecipeModifiers.accurateParallel(
-                            machine,
-                            modifiedRecipe,
-                            calculateParallel(),
-                            false).getFirst();
-                }
-            }
-        }
-        return null;
+        return (long) (BASE_EU_COST * Math.pow(32, ocTimes));
     }
 
     // 计算实际并行（考虑蓝梦流体加成）
-    private static int calculateParallel() {
+    private int calculateParallel() {
         int base = getBaseParallel();
         if (!isInfinityDreamEnabled()) return base;
 
         // 每1000B流体翻倍一次，但不超过int最大值
         long multiplier = eternalbluedream / 1_000_000_000L;
-        return (int) Math.min(base * (1000L << multiplier), Integer.MAX_VALUE);
+        return (int) Math.min(base * (1L << multiplier), Integer.MAX_VALUE);
     }
 
     // 计算基础并行（电路编号的8次方，1号特殊处理）
-    private static int getBaseParallel() {
+    private int getBaseParallel() {
         synchronized (ocLock) {
             return (oc == 1) ? BASE_PARALLEL : (int) Math.pow(oc, 8);
         }
@@ -146,14 +137,14 @@ public class BlackHoleMatterDecompressor extends NoEnergyMultiblockMachine {
     public void onStructureFormed() {
         super.onStructureFormed();
         int[] priorityOrder = { 8, 7, 6, 5, 4, 3, 2, 1 };
-        synchronized (ocLock) { // 同步修改
+        synchronized (ocLock) { // 使用实例的ocLock
             for (int config : priorityOrder) {
+                this.oc = 0; // 通过this访问实例变量
                 if (MachineIO.notConsumableCircuit(this, config)) {
-                    oc = config;
+                    this.oc = config;
                     return;
                 }
             }
-            oc = 0;
         }
     }
 
@@ -234,9 +225,9 @@ public class BlackHoleMatterDecompressor extends NoEnergyMultiblockMachine {
         int effectiveConfig = Math.min(oc, 4);
         return switch (effectiveConfig) {
             case 1 -> 1.0;
-            case 2 -> 2.0;
-            case 3 -> 4.0;
-            case 4 -> 8.0;
+            case 2 -> 32.0;
+            case 3 -> 1024.0;
+            case 4 -> 32768.0;
             default -> 1.0;
         };
     }

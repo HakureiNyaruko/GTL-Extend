@@ -2,7 +2,6 @@ package org.qiuyeqaq.gtl_extend.common.data.recipe;
 
 import org.gtlcore.gtlcore.utils.Registries;
 
-import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.data.recipe.CustomTags;
 import com.gregtechceu.gtceu.data.recipe.VanillaRecipeHelper;
 
@@ -20,6 +19,7 @@ import org.qiuyeqaq.gtl_extend.config.GTLExtendConfigHolder;
 
 import java.util.function.Consumer;
 
+import static com.gregtechceu.gtceu.api.GTValues.*;
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.EXTRACTOR_RECIPES;
 import static org.gtlcore.gtlcore.common.data.GTLRecipeTypes.SUPRACHRONAL_ASSEMBLY_LINE_RECIPES;
 import static org.qiuyeqaq.gtl_extend.common.blocks.Gtl_extend_Blocks.VOID_WORLD_BLOCK;
@@ -84,11 +84,19 @@ public class CustomRecipe {
                     'A', GetRegistries.getItem("ae2:sky_stone_block"),
                     'B', CustomTags.EV_CIRCUITS);
 
-            EXTRACTOR_RECIPES.recipeBuilder("rtt_fluid_fluix")
+            EXTRACTOR_RECIPES.recipeBuilder("gtl_extend_fluid_fluix")
                     .inputItems(Registries.getItem("ae2:fluix_dust"))
                     .outputFluids(GTL_Extend_Materials.FLUIXCRYSTAL.getFluid(144))
                     .duration(200)
-                    .EUt(GTValues.V[GTValues.LV])
+                    .EUt(V[LV])
+                    .save(provider);
+
+            VOID_PUMP_RECIPES.recipeBuilder("gtl_extend_fluid_fluix1")
+                    .circuitMeta(3)
+                    .outputFluids(GTL_Extend_Materials.FLUIXCRYSTAL.getFluid(1000))
+                    .duration(500)
+                    .EUt(VA[LuV])
+                    .addData("CRTier", 2)
                     .save(provider);
 
             Object[][] aeCableConfigs = new Object[][] {
@@ -119,7 +127,7 @@ public class CustomRecipe {
                         .inputFluids(GTL_Extend_Materials.FLUIXCRYSTAL.getFluid(144))
                         .outputItems(Registries.getItem(outputItem), outputCount)
                         .duration(512)
-                        .EUt(GTValues.V[GTValues.IV])
+                        .EUt(V[IV])
                         .save(provider);
             }
         }
@@ -127,10 +135,10 @@ public class CustomRecipe {
 
             VOID_PUMP_RECIPES.recipeBuilder("eternal_blue_dream_vein_fluid")
                     .circuitMeta(2)
-                    .outputFluids(ETERNALBLUEDREAM.getFluid(1296))
+                    .outputFluids(ETERNALBLUEDREAM.getFluid(1000))
                     .duration(500)
-                    .EUt(GTValues.VA[GTValues.LuV])
-                    .addData("CRier", 2)
+                    .EUt(VA[LuV])
+                    .addData("CRTier", 2)
                     .save(provider);
 
             // 生成 LV 配方（基础）
@@ -138,7 +146,7 @@ public class CustomRecipe {
                     .inputItems(Registries.getItem("minecraft:sand"), 64)
                     .inputFluids(ETERNALBLUEDREAM.getFluid(9216))
                     .outputItems(Gtl_extend_Item.ETERNALBLUE_DREAM_LV_PROCESSOR_MAINFRAME.get())
-                    .EUt(GTValues.V[GTValues.UEV] * 10L)
+                    .EUt(VA[UEV] * 10L)
                     .duration(1)
                     .save(provider);
 
@@ -152,7 +160,7 @@ public class CustomRecipe {
                         .inputItems(getItemEntry(prevTier).get()) // 输入前一级物品
                         .inputFluids(ETERNALBLUEDREAM.getFluid(9216)) // 固定流体输入
                         .outputItems(getItemEntry(currentTier).get()) // 输出当前级物品
-                        .EUt(GTValues.V[GTValues.UEV] * 10L)
+                        .EUt(V[UEV] * 10L)
                         .duration(1)
                         .save(provider);
             }
