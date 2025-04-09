@@ -160,9 +160,9 @@ public class BlackHoleMatterDecompressor extends NoEnergyMultiblockMachine {
 
         // 处理额外流体输入（永恒蓝梦）
         if (isInfinityDreamEnabled()) {
-            FluidStack extraFluid = FluidStack.create(ETERNALBLUEDREAM.getFluid(), 100000000);
+            FluidStack extraFluid = FluidStack.create(ETERNALBLUEDREAM.getFluid(), 10000000000L);
             if (MachineIO.inputFluid(this, extraFluid)) {
-                eternalbluedream += 100000000;
+                eternalbluedream += 10000000000L;
             }
         }
         return false;

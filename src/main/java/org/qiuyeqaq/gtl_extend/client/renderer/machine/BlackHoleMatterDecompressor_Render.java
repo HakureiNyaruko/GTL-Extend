@@ -97,7 +97,7 @@ public class BlackHoleMatterDecompressor_Render extends WorkableCasingMachineRen
     @OnlyIn(Dist.CLIENT)
     private void renderEventHorizon(PoseStack poseStack, MultiBufferSource buffer) {
         poseStack.pushPose();
-        poseStack.scale(0.8F, 0.8F, 0.8F); // 80% 原始大小
+        poseStack.scale(500.0F, 500.0F, 500.0F); // 80% 原始大小
 
         // 完全黑暗的光照参数
         int packedLight = LightTexture.pack(0, 0);
