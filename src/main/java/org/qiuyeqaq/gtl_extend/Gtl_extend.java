@@ -1,14 +1,12 @@
 package org.qiuyeqaq.gtl_extend;
 
-import org.gtlcore.gtlcore.GTLCore;
-import org.gtlcore.gtlcore.utils.StorageManager;
-
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
-
+import org.gtlcore.gtlcore.GTLCore;
+import org.gtlcore.gtlcore.utils.StorageManager;
 import org.qiuyeqaq.gtl_extend.client.ClientProxy;
 import org.qiuyeqaq.gtl_extend.common.CommonProxy;
 import org.slf4j.Logger;
