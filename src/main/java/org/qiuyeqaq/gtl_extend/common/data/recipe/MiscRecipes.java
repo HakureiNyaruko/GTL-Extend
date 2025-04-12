@@ -1,15 +1,13 @@
 package org.qiuyeqaq.gtl_extend.common.data.recipe;
 
-import org.gtlcore.gtlcore.common.data.GTLMaterials;
-import org.gtlcore.gtlcore.utils.Registries;
-
 import com.gregtechceu.gtceu.api.fluids.store.FluidStorageKeys;
 import com.gregtechceu.gtceu.common.data.GTItems;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
 import com.gregtechceu.gtceu.data.recipe.CustomTags;
-
 import net.minecraft.data.recipes.FinishedRecipe;
-
+import net.minecraft.world.item.ItemStack;
+import org.gtlcore.gtlcore.common.data.GTLMaterials;
+import org.gtlcore.gtlcore.utils.Registries;
 import org.qiuyeqaq.gtl_extend.common.items.Gtl_extend_Item;
 import org.qiuyeqaq.gtl_extend.common.multiblock.MultiBlockMachine;
 
@@ -29,6 +27,18 @@ import static org.qiuyeqaq.gtl_extend.common.machines.recipes.GTL_Extend_RecipeT
 public class MiscRecipes {
 
     public static void init(Consumer<FinishedRecipe> provider) {
+        MAGIC_ENERGY_RECIPES.recipeBuilder("magic_energy")
+                .chancedInput(new ItemStack(Registries.getItem("minecraft:end_crystal"), 100000), 9000, 0)
+                .duration(100)
+                .EUt(-90000000)
+                .save(provider);
+
+        DRAGON_EGG_ENERGY_RECIPES.recipeBuilder("dragon_egg_energy")
+                .chancedInput(new ItemStack(Registries.getItem("minecraft:dragon_egg"), 1000), 9000, 0)
+                .duration(100)
+                .EUt(-900000000000L)
+                .save(provider);
+
         CATTLE_CATTLE_MACHINE_RECIPES.recipeBuilder("gtl_extend_milk")
                 .notConsumable(Registries.getItem("minecraft:cow_spawn_egg"))
                 .outputFluids(Milk.getFluid(10000))
