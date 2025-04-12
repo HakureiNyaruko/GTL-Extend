@@ -1,16 +1,14 @@
 package org.qiuyeqaq.gtl_extend.common.data.recipe;
 
-import org.gtlcore.gtlcore.utils.Registries;
-
+import com.gregtechceu.gtceu.common.data.GTMaterials;
 import com.gregtechceu.gtceu.data.recipe.CustomTags;
 import com.gregtechceu.gtceu.data.recipe.VanillaRecipeHelper;
-
+import com.tterrag.registrate.util.entry.ItemEntry;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-
-import com.tterrag.registrate.util.entry.ItemEntry;
+import org.gtlcore.gtlcore.utils.Registries;
 import org.qiuyeqaq.gtl_extend.common.data.GetRegistries;
 import org.qiuyeqaq.gtl_extend.common.items.Gtl_extend_Item;
 import org.qiuyeqaq.gtl_extend.common.materials.GTL_Extend_Materials;
@@ -21,6 +19,7 @@ import java.util.function.Consumer;
 
 import static com.gregtechceu.gtceu.api.GTValues.*;
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.EXTRACTOR_RECIPES;
+import static org.gtlcore.gtlcore.common.data.GTLRecipeTypes.RANDOM_ORE_RECIPES;
 import static org.gtlcore.gtlcore.common.data.GTLRecipeTypes.SUPRACHRONAL_ASSEMBLY_LINE_RECIPES;
 import static org.qiuyeqaq.gtl_extend.common.blocks.Gtl_extend_Blocks.VOID_WORLD_BLOCK;
 import static org.qiuyeqaq.gtl_extend.common.machines.recipes.GTL_Extend_RecipeTypes.GENERAL_PURPOSE_AE_PRODUCTION_RECIPES;
@@ -132,6 +131,13 @@ public class CustomRecipe {
             }
         }
         if (GTLExtendConfigHolder.INSTANCE.enableInfinityDreamAndDreamHostCrafting) {
+
+            RANDOM_ORE_RECIPES.recipeBuilder("eternal_blue_dream_vein")
+                    .inputFluids(GTMaterials.DrillingFluid.getFluid(1000000))
+                    .circuitMeta(1)
+                    .outputItems(GetRegistries.getItem("gtceu:tuff_eternal_blue_dream_vein_ore"))
+                    .EUt(VA[LuV] * 2)
+                    .save(provider);
 
             VOID_PUMP_RECIPES.recipeBuilder("eternal_blue_dream_vein_fluid")
                     .circuitMeta(2)

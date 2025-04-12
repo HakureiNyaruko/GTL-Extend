@@ -213,6 +213,12 @@ public class MultiBlockMachine {
                 .recipeType(GCyMRecipeTypes.ALLOY_BLAST_RECIPES)
                 .recipeModifiers(GTRecipeModifiers.PARALLEL_HATCH,
                         GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.PERFECT_OVERCLOCK_SUBTICK))
+                .recipeModifier((machine, recipe, params, result) -> {
+                    GTRecipe recipe_s = recipe.copy();
+                    recipe_s.duration = 1;
+                    recipe_s = GTRecipeModifiers.fastParallel(machine, recipe_s, Integer.MAX_VALUE,false).getFirst();
+                    return recipe_s;
+                })
                 .tooltips(Component.literal(TextUtil.full_color("最大并行数：int")))
                 .tooltips(Component.literal(TextUtil.full_color("26个线圈就可以让你获得无与伦比的并行和跨配方并行")))
                 .tooltips(Component.literal(TextUtil.full_color("所有配方都为1t")))
