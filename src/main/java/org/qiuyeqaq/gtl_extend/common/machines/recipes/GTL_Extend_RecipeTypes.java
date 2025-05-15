@@ -4,24 +4,17 @@ import com.gregtechceu.gtceu.api.capability.recipe.IO;
 import com.gregtechceu.gtceu.api.gui.GuiTextures;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
 import com.gregtechceu.gtceu.common.data.GTSoundEntries;
+
 import com.lowdragmc.lowdraglib.utils.LocalizationUtils;
+
 import net.minecraft.client.resources.language.I18n;
 
-import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.*;
+import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.MULTIBLOCK;
+import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.register;
 import static com.lowdragmc.lowdraglib.gui.texture.ProgressTexture.FillDirection.LEFT_TO_RIGHT;
 
 public class GTL_Extend_RecipeTypes {
 
-    public final static GTRecipeType MAGIC_ENERGY_RECIPES = register("primitive_magic_energy", GENERATOR)
-            .setEUIO(IO.OUT)
-            .setMaxIOSize(1, 0, 0, 0)
-            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
-            .setSound(GTSoundEntries.COMBUSTION);
-    public final static GTRecipeType DRAGON_EGG_ENERGY_RECIPES = register("primitive_dragon_egg_energy", GENERATOR)
-            .setEUIO(IO.OUT)
-            .setMaxIOSize(1, 0, 0, 0)
-            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
-            .setSound(GTSoundEntries.COMBUSTION);
     public final static GTRecipeType HORIZON_MATTER_DECOMPRESSION_RECIPES = register("horizon_matter_decompression", MULTIBLOCK)
             .setMaxIOSize(1, 0, 1, 36)
             .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)

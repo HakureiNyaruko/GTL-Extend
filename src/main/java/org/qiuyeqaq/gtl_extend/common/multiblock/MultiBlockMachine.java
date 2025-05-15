@@ -216,7 +216,7 @@ public class MultiBlockMachine {
                 .recipeModifier((machine, recipe, params, result) -> {
                     GTRecipe recipe_s = recipe.copy();
                     recipe_s.duration = 1;
-                    recipe_s = GTRecipeModifiers.fastParallel(machine, recipe_s, Integer.MAX_VALUE,false).getFirst();
+                    recipe_s = GTRecipeModifiers.fastParallel(machine, recipe_s, Integer.MAX_VALUE, false).getFirst();
                     return recipe_s;
                 })
                 .tooltips(Component.literal(TextUtil.full_color("最大并行数：int")))

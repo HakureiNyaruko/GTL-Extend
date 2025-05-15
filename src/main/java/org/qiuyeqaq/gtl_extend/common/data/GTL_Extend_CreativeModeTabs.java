@@ -1,7 +1,8 @@
 package org.qiuyeqaq.gtl_extend.common.data;
 
-import com.tterrag.registrate.util.entry.RegistryEntry;
 import net.minecraft.world.item.CreativeModeTab;
+
+import com.tterrag.registrate.util.entry.RegistryEntry;
 import org.qiuyeqaq.gtl_extend.Gtl_extend;
 import org.qiuyeqaq.gtl_extend.api.registries.GTLEXRegistration;
 import org.qiuyeqaq.gtl_extend.common.blocks.Gtl_extend_Blocks;
@@ -40,5 +41,4 @@ public class GTL_Extend_CreativeModeTabs {
     }
 
     public static void init() {}
-
 }

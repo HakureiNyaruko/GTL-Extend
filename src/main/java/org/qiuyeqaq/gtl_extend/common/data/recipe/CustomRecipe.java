@@ -1,13 +1,16 @@
 package org.qiuyeqaq.gtl_extend.common.data.recipe;
 
+import org.gtlcore.gtlcore.utils.Registries;
+
 import com.gregtechceu.gtceu.data.recipe.CustomTags;
 import com.gregtechceu.gtceu.data.recipe.VanillaRecipeHelper;
-import com.tterrag.registrate.util.entry.ItemEntry;
+
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import org.gtlcore.gtlcore.utils.Registries;
+
+import com.tterrag.registrate.util.entry.ItemEntry;
 import org.qiuyeqaq.gtl_extend.common.data.GetRegistries;
 import org.qiuyeqaq.gtl_extend.common.items.Gtl_extend_Item;
 import org.qiuyeqaq.gtl_extend.common.materials.GTL_Extend_Materials;

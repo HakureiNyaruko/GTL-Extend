@@ -1,9 +1,11 @@
 package org.qiuyeqaq.gtl_extend.api.machine;
 
+import org.gtlcore.gtlcore.api.machine.multiblock.ParallelMachine;
+
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableElectricMultiblockMachine;
 import com.gregtechceu.gtceu.api.machine.trait.RecipeLogic;
-import org.gtlcore.gtlcore.api.machine.multiblock.ParallelMachine;
+
 import org.jetbrains.annotations.NotNull;
 import org.qiuyeqaq.gtl_extend.api.registries.GTLEXMultipleRecipes;
 
@@ -22,5 +24,7 @@ public class GTLEXSuperfluidGeneralEnergyFurnaceMachine extends WorkableElectric
     }
 
     @Override
-    public int getMaxParallel() {return Integer.MAX_VALUE;}
+    public int getMaxParallel() {
+        return Integer.MAX_VALUE;
+    }
 }

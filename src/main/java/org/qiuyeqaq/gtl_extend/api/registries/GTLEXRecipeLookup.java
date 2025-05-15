@@ -5,6 +5,7 @@ import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
 import com.gregtechceu.gtceu.api.recipe.lookup.AbstractMapIngredient;
 import com.gregtechceu.gtceu.api.recipe.lookup.GTRecipeLookup;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -35,6 +36,7 @@ public class GTLEXRecipeLookup extends GTRecipeLookup {
     }
 
     static class AdvancedRecipeIterator implements Iterator<GTRecipe> {
+
         public final List<List<AbstractMapIngredient>> ingredients;
         private final GTRecipeLookup lookup;
         private final Predicate<GTRecipe> canHandle;

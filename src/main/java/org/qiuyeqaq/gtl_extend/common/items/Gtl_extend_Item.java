@@ -4,8 +4,10 @@ import com.gregtechceu.gtceu.api.item.ComponentItem;
 import com.gregtechceu.gtceu.api.item.component.IItemComponent;
 import com.gregtechceu.gtceu.common.data.GTCompassSections;
 import com.gregtechceu.gtceu.common.item.DataItemBehavior;
-import com.tterrag.registrate.util.entry.ItemEntry;
+
 import net.minecraft.world.item.Item;
+
+import com.tterrag.registrate.util.entry.ItemEntry;
 import org.qiuyeqaq.gtl_extend.common.data.GTL_Extend_CreativeModeTabs;
 
 import static com.gregtechceu.gtceu.common.data.GTItems.attach;

@@ -5,13 +5,14 @@ import com.gregtechceu.gtceu.api.data.RotationState;
 import com.gregtechceu.gtceu.api.machine.MachineDefinition;
 import com.gregtechceu.gtceu.client.renderer.machine.SimpleGeneratorMachineRenderer;
 import com.gregtechceu.gtceu.utils.FormattingUtil;
+
 import net.minecraft.network.chat.Component;
+
 import org.qiuyeqaq.gtl_extend.api.registries.GTLEXRegistration;
 import org.qiuyeqaq.gtl_extend.api.registries.MachinesRegister;
 import org.qiuyeqaq.gtl_extend.common.data.GTL_Extend_CreativeModeTabs;
 import org.qiuyeqaq.gtl_extend.common.machines.generator.DragonEggEnergyMachine;
 import org.qiuyeqaq.gtl_extend.common.machines.generator.MagicEnergyMachine;
-import org.qiuyeqaq.gtl_extend.common.machines.recipes.GTL_Extend_RecipeTypes;
 
 import static com.gregtechceu.gtceu.api.GTValues.*;
 import static org.qiuyeqaq.gtl_extend.common.multiblock.MultiBlockMachine.GTL_EX_ADD;
@@ -41,7 +42,6 @@ public class GTL_Extend_SmallMachines {
                         .tooltips(Component.translatable("gtceu.universal.tooltip.energy_storage_capacity",
                                 FormattingUtil.formatNumbers(V[tier] * 2048L)))
                         .tooltipBuilder(GTL_EX_ADD)
-                        .recipeTypes(GTL_Extend_RecipeTypes.MAGIC_ENERGY_RECIPES)
                         .register(),
                 MV, HV, EV, IV, LuV, ZPM);
 
@@ -60,7 +60,6 @@ public class GTL_Extend_SmallMachines {
                         .tooltips(Component.translatable("gtceu.universal.tooltip.energy_storage_capacity",
                                 FormattingUtil.formatNumbers(VEX[tier] * 16384)))
                         .tooltipBuilder(GTL_EX_ADD)
-                        .recipeType(GTL_Extend_RecipeTypes.DRAGON_EGG_ENERGY_RECIPES)
                         .register(),
                 UV, UHV, UEV, UIV);
     }
