@@ -1,15 +1,12 @@
 package org.qiuyeqaq.gtl_extend.common.data.recipe;
 
-import org.gtlcore.gtlcore.common.data.GTLMaterials;
-import org.gtlcore.gtlcore.utils.Registries;
-
 import com.gregtechceu.gtceu.api.fluids.store.FluidStorageKeys;
 import com.gregtechceu.gtceu.common.data.GTItems;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
 import com.gregtechceu.gtceu.data.recipe.CustomTags;
-
 import net.minecraft.data.recipes.FinishedRecipe;
-
+import org.gtlcore.gtlcore.common.data.GTLMaterials;
+import org.gtlcore.gtlcore.utils.Registries;
 import org.qiuyeqaq.gtl_extend.common.items.Gtl_extend_Item;
 import org.qiuyeqaq.gtl_extend.common.multiblock.MultiBlockMachine;
 
@@ -67,6 +64,7 @@ public class MiscRecipes {
                 .inputFluids(Hydrogen.getFluid(625000))
                 .inputFluids(Oxygen.getFluid(1111000))
                 .inputFluids(Chlorine.getFluid(125000))
+                .inputFluids(Fluorine.getFluid(1000))
                 .outputItems(Registries.getItem("gtceu:platinum_dust"), 555)
                 .outputItems(Registries.getItem("gtceu:palladium_dust"), 555)
                 .outputItems(Registries.getItem("gtceu:ruthenium_dust"), 555)
